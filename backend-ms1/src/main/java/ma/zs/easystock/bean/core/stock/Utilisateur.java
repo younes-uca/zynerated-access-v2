@@ -43,7 +43,7 @@ public class Utilisateur   extends AuditBusinessObject     {
     private Boolean passwordChanged = false;
 
 
-    private List<ModelPermission> modelPermissions ;
+    private List<ModelPermissionUtilisateur> modelPermissionUtilisateurs ;
     private List<DroitUtilisateur> droitUtilisateurs ;
 
     public Utilisateur(){
@@ -118,13 +118,13 @@ public class Utilisateur   extends AuditBusinessObject     {
     public void setPasswordChanged(boolean passwordChanged){
         this.passwordChanged = passwordChanged;
     }
-    @OneToMany
+    @OneToMany(mappedBy = "utilisateur")
 
-    public List<ModelPermission> getModelPermissions(){
-        return this.modelPermissions;
+    public List<ModelPermissionUtilisateur> getModelPermissionUtilisateurs(){
+        return this.modelPermissionUtilisateurs;
     }
-    public void setModelPermissions(List<ModelPermission> modelPermissions){
-        this.modelPermissions = modelPermissions;
+    public void setModelPermissionUtilisateurs(List<ModelPermissionUtilisateur> modelPermissionUtilisateurs){
+        this.modelPermissionUtilisateurs = modelPermissionUtilisateurs;
     }
     @OneToMany(mappedBy = "utilisateur")
 

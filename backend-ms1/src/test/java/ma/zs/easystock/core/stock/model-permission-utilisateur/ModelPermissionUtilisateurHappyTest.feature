@@ -1,13 +1,13 @@
-Feature: Permission
+Feature: ModelPermissionUtilisateur
 
   Background:
     * call read('karate-config.js')
     * call read('db_cleaner.js')
-    * url permissionUrl
+    * url modelPermissionUtilisateurUrl
     * header Content-Type = 'application/json'
 
-    * def postBody = read('PermissionSave.json')
-    * def objectSchema = read('PermissionSchema.json')
+    * def postBody = read('ModelPermissionUtilisateurSave.json')
+    * def objectSchema = read('ModelPermissionUtilisateurSchema.json')
 
   @save
   Scenario: POST item and GET it by ID

@@ -48,18 +48,18 @@ function fn() {
     config.actuatorUri = config.rootUrl + 'actuator/';
     config.adminUri = config.rootUrl + 'api/admin/';
 
-        config.droitUtilisateurUrl = config.adminUri + 'droitUtilisateur/';
-    config.permissionUrl = config.adminUri + 'permission/';
-    config.droitUrl = config.adminUri + 'droit/';
-    config.actionPermissionUrl = config.adminUri + 'actionPermission/';
+        config.actionPermissionUrl = config.adminUri + 'actionPermission/';
+    config.modelPermissionUtilisateurUrl = config.adminUri + 'modelPermissionUtilisateur/';
     config.paiementAchatUrl = config.adminUri + 'paiementAchat/';
     config.categorieProduitUrl = config.adminUri + 'categorieProduit/';
     config.produitUrl = config.adminUri + 'produit/';
-    config.modelPermissionUrl = config.adminUri + 'modelPermission/';
     config.achatUrl = config.adminUri + 'achat/';
+    config.droitUrl = config.adminUri + 'droit/';
     config.clientUrl = config.adminUri + 'client/';
-    config.achatItemUrl = config.adminUri + 'achatItem/';
+    config.droitUtilisateurUrl = config.adminUri + 'droitUtilisateur/';
     config.utilisateurUrl = config.adminUri + 'utilisateur/';
+    config.modelPermissionUrl = config.adminUri + 'modelPermission/';
+    config.achatItemUrl = config.adminUri + 'achatItem/';
 
     common = karate.callSingle('classpath:common.feature', config);
     config.uniqueId = common.uniqueId

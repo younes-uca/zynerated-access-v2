@@ -17,48 +17,6 @@
     "list": "List",
 
 
-    "droitUtilisateur":{
-        "droit": "Droit",
-        "droitPlaceHolder": "Select a Droit",
-        "droitPlaceHolderFilter": "Search by Droit",
-        "utilisateur": "Utilisateur",
-        "utilisateurPlaceHolder": "Select a Utilisateur",
-        "utilisateurPlaceHolderFilter": "Search by Utilisateur",
-        "droitUtilisateur": "Droit utilisateur",
-        "tabPan": "Droit utilisateur",
-        "header": "Liste des droit utilisateurs",
-        "deleteDroitUtilisateurConfirmationMessage": "Are you sure you want to delete droit utilisateur",
-        "deleteDroitUtilisateursConfirmationMessage": "Are you sure you want to delete the selected elements"
-    },
-
-
-    "permission":{
-        "actionPermission": "Action permission",
-        "actionPermissionPlaceHolder": "Select a Action permission",
-        "actionPermissionPlaceHolderFilter": "Search by Action permission",
-        "modelPermission": "Model permission",
-        "modelPermissionPlaceHolder": "Select a Model permission",
-        "modelPermissionPlaceHolderFilter": "Search by Model permission",
-        "subAttribute": "Sub attribute",
-        "value": "Value",
-        "permission": "Permission",
-        "tabPan": "Permission",
-        "header": "Liste des permissions",
-        "deletePermissionConfirmationMessage": "Are you sure you want to delete permission",
-        "deletePermissionsConfirmationMessage": "Are you sure you want to delete the selected elements"
-    },
-
-
-    "droit":{
-        "authority": "Authority",
-        "droit": "Droit",
-        "tabPan": "Droit",
-        "header": "Liste des droits",
-        "deleteDroitConfirmationMessage": "Are you sure you want to delete droit",
-        "deleteDroitsConfirmationMessage": "Are you sure you want to delete the selected elements"
-    },
-
-
     "actionPermission":{
         "reference": "Reference",
         "libelle": "Libelle",
@@ -67,6 +25,26 @@
         "header": "Liste des action permissions",
         "deleteActionPermissionConfirmationMessage": "Are you sure you want to delete action permission",
         "deleteActionPermissionsConfirmationMessage": "Are you sure you want to delete the selected elements"
+    },
+
+
+    "modelPermissionUtilisateur":{
+        "actionPermission": "Action permission",
+        "actionPermissionPlaceHolder": "Select a Action permission",
+        "actionPermissionPlaceHolderFilter": "Search by Action permission",
+        "modelPermission": "Model permission",
+        "modelPermissionPlaceHolder": "Select a Model permission",
+        "modelPermissionPlaceHolderFilter": "Search by Model permission",
+        "value": "Value",
+        "utilisateur": "Utilisateur",
+        "utilisateurPlaceHolder": "Select a Utilisateur",
+        "utilisateurPlaceHolderFilter": "Search by Utilisateur",
+        "subAttribute": "Sub attribute",
+        "modelPermissionUtilisateur": "Model permission utilisateur",
+        "tabPan": "Model permission utilisateur",
+        "header": "Liste des model permission utilisateurs",
+        "deleteModelPermissionUtilisateurConfirmationMessage": "Are you sure you want to delete model permission utilisateur",
+        "deleteModelPermissionUtilisateursConfirmationMessage": "Are you sure you want to delete the selected elements"
     },
 
 
@@ -126,18 +104,6 @@
     },
 
 
-    "modelPermission":{
-        "reference": "Reference",
-        "libelle": "Libelle",
-        "permissions": "Permissions",
-        "modelPermission": "Model permission",
-        "tabPan": "Model permission",
-        "header": "Liste des model permissions",
-        "deleteModelPermissionConfirmationMessage": "Are you sure you want to delete model permission",
-        "deleteModelPermissionsConfirmationMessage": "Are you sure you want to delete the selected elements"
-    },
-
-
     "achat":{
         "reference": "Reference",
         "dateAchat": "Date achat",
@@ -163,6 +129,16 @@
     },
 
 
+    "droit":{
+        "authority": "Authority",
+        "droit": "Droit",
+        "tabPan": "Droit",
+        "header": "Liste des droits",
+        "deleteDroitConfirmationMessage": "Are you sure you want to delete droit",
+        "deleteDroitsConfirmationMessage": "Are you sure you want to delete the selected elements"
+    },
+
+
     "client":{
         "cin": "Cin",
         "nom": "Nom",
@@ -178,6 +154,52 @@
         "header": "Liste des clients",
         "deleteClientConfirmationMessage": "Are you sure you want to delete client",
         "deleteClientsConfirmationMessage": "Are you sure you want to delete the selected elements"
+    },
+
+
+    "droitUtilisateur":{
+        "droit": "Droit",
+        "droitPlaceHolder": "Select a Droit",
+        "droitPlaceHolderFilter": "Search by Droit",
+        "utilisateur": "Utilisateur",
+        "utilisateurPlaceHolder": "Select a Utilisateur",
+        "utilisateurPlaceHolderFilter": "Search by Utilisateur",
+        "droitUtilisateur": "Droit utilisateur",
+        "tabPan": "Droit utilisateur",
+        "header": "Liste des droit utilisateurs",
+        "deleteDroitUtilisateurConfirmationMessage": "Are you sure you want to delete droit utilisateur",
+        "deleteDroitUtilisateursConfirmationMessage": "Are you sure you want to delete the selected elements"
+    },
+
+
+    "utilisateur":{
+        "credentialsNonExpired": "Credentials non expired",
+        "enabled": "Enabled",
+        "email": "Email",
+        "accountNonExpired": "Account non expired",
+        "accountNonLocked": "Account non locked",
+        "username": "Username",
+        "password": "Password",
+        "passwordChanged": "Password changed",
+        "modelPermissionUtilisateurs": "Model permission utilisateurs",
+        "droitUtilisateurs": "Droit utilisateurs",
+        "DroitUtilisateursPlaceHolder": "Select multiple Droits",
+        "utilisateur": "Utilisateur",
+        "tabPan": "Utilisateur",
+        "header": "Liste des utilisateurs",
+        "deleteUtilisateurConfirmationMessage": "Are you sure you want to delete utilisateur",
+        "deleteUtilisateursConfirmationMessage": "Are you sure you want to delete the selected elements"
+    },
+
+
+    "modelPermission":{
+        "reference": "Reference",
+        "libelle": "Libelle",
+        "modelPermission": "Model permission",
+        "tabPan": "Model permission",
+        "header": "Liste des model permissions",
+        "deleteModelPermissionConfirmationMessage": "Are you sure you want to delete model permission",
+        "deleteModelPermissionsConfirmationMessage": "Are you sure you want to delete the selected elements"
     },
 
 
@@ -208,26 +230,6 @@
         "header": "Liste des achat items",
         "deleteAchatItemConfirmationMessage": "Are you sure you want to delete achat item",
         "deleteAchatItemsConfirmationMessage": "Are you sure you want to delete the selected elements"
-    },
-
-
-    "utilisateur":{
-        "credentialsNonExpired": "Credentials non expired",
-        "enabled": "Enabled",
-        "email": "Email",
-        "accountNonExpired": "Account non expired",
-        "accountNonLocked": "Account non locked",
-        "username": "Username",
-        "password": "Password",
-        "passwordChanged": "Password changed",
-        "modelPermissions": "Model permissions",
-        "droitUtilisateurs": "Droit utilisateurs",
-        "DroitUtilisateursPlaceHolder": "Select multiple Droits",
-        "utilisateur": "Utilisateur",
-        "tabPan": "Utilisateur",
-        "header": "Liste des utilisateurs",
-        "deleteUtilisateurConfirmationMessage": "Are you sure you want to delete utilisateur",
-        "deleteUtilisateursConfirmationMessage": "Are you sure you want to delete the selected elements"
     },
 
 "appName": "GED"

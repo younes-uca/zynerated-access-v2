@@ -112,10 +112,13 @@
                     <td style="text-align: left;border-bottom: 0"><span style="font-weight: bold;">Model permission:</span> #displayComposedDataIfNotNull($modelPermission,$modelPermission.reference)</td>
                 </tr>
                 <tr>
-                    <td style="text-align: left;border-bottom: 0"><span style="font-weight: bold;">Sub attribute:</span> #displayDataIfNotNull($subAttribute)</td>
+                    <td style="text-align: left;border-bottom: 0"><span style="font-weight: bold;">Value:</span> #displayDataIfNotNull($value)</td>
                 </tr>
                 <tr>
-                    <td style="text-align: left;border-bottom: 0"><span style="font-weight: bold;">Value:</span> #displayDataIfNotNull($value)</td>
+                    <td style="text-align: left;border-bottom: 0"><span style="font-weight: bold;">Utilisateur:</span> #displayComposedDataIfNotNull($utilisateur,$utilisateur.email)</td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;border-bottom: 0"><span style="font-weight: bold;">Sub attribute:</span> #displayDataIfNotNull($subAttribute)</td>
                 </tr>
 
     </table>

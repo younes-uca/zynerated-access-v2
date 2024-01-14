@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ma.zs.easystock.zynerator.util.ListUtil;
 
+import ma.zs.easystock.ws.converter.stock.ProduitConverter;
 import ma.zs.easystock.ws.converter.stock.PaiementAchatConverter;
 import ma.zs.easystock.ws.converter.stock.ClientConverter;
-import ma.zs.easystock.ws.converter.stock.ProduitConverter;
 import ma.zs.easystock.ws.converter.stock.AchatItemConverter;
 
 
@@ -21,23 +21,23 @@ import ma.zs.easystock.ws.dto.stock.AchatDto;
 public class AchatConverter extends AbstractConverter<Achat, AchatDto> {
 
     @Autowired
+    private ProduitConverter produitConverter ;
+    @Autowired
     private PaiementAchatConverter paiementAchatConverter ;
     @Autowired
     private ClientConverter clientConverter ;
-    @Autowired
-    private ProduitConverter produitConverter ;
     @Autowired
     private AchatItemConverter achatItemConverter ;
     private boolean client;
     private boolean paiementAchats;
     private boolean achatItems;
 
-    public  AchatConverter(){//PaiementAchat paiementAchatClient clientProduit produitAchatItem achatItem,){
+    public  AchatConverter(){//Produit produitPaiementAchat paiementAchatClient clientAchatItem achatItem){
         super(Achat.class, AchatDto.class);
         init(true);
+        //this.produit =  produit ;
         //this.paiementAchat =  paiementAchat ;
         //this.client =  client ;
-        //this.produit =  produit ;
         //this.achatItem =  achatItem ;
     }
 
@@ -124,6 +124,12 @@ public class AchatConverter extends AbstractConverter<Achat, AchatDto> {
     }
 
 
+    public ProduitConverter getProduitConverter(){
+        return this.produitConverter;
+    }
+    public void setProduitConverter(ProduitConverter produitConverter ){
+        this.produitConverter = produitConverter;
+    }
     public PaiementAchatConverter getPaiementAchatConverter(){
         return this.paiementAchatConverter;
     }
@@ -135,12 +141,6 @@ public class AchatConverter extends AbstractConverter<Achat, AchatDto> {
     }
     public void setClientConverter(ClientConverter clientConverter ){
         this.clientConverter = clientConverter;
-    }
-    public ProduitConverter getProduitConverter(){
-        return this.produitConverter;
-    }
-    public void setProduitConverter(ProduitConverter produitConverter ){
-        this.produitConverter = produitConverter;
     }
     public AchatItemConverter getAchatItemConverter(){
         return this.achatItemConverter;

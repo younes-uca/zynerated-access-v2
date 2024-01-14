@@ -5,20 +5,28 @@ package  ma.zs.easystock.dao.criteria.core.stock;
 import ma.zs.easystock.zynerator.criteria.BaseCriteria;
 import java.util.List;
 
-public class PermissionCriteria extends  BaseCriteria  {
+public class ModelPermissionUtilisateurCriteria extends  BaseCriteria  {
 
+    private Boolean value;
     private String subAttribute;
     private String subAttributeLike;
-    private Boolean value;
 
     private ActionPermissionCriteria actionPermission ;
     private List<ActionPermissionCriteria> actionPermissions ;
     private ModelPermissionCriteria modelPermission ;
     private List<ModelPermissionCriteria> modelPermissions ;
+    private UtilisateurCriteria utilisateur ;
+    private List<UtilisateurCriteria> utilisateurs ;
 
 
-    public PermissionCriteria(){}
+    public ModelPermissionUtilisateurCriteria(){}
 
+    public Boolean getValue(){
+        return this.value;
+    }
+    public void setValue(Boolean value){
+        this.value = value;
+    }
     public String getSubAttribute(){
         return this.subAttribute;
     }
@@ -32,12 +40,6 @@ public class PermissionCriteria extends  BaseCriteria  {
         this.subAttributeLike = subAttributeLike;
     }
 
-    public Boolean getValue(){
-        return this.value;
-    }
-    public void setValue(Boolean value){
-        this.value = value;
-    }
 
     public ActionPermissionCriteria getActionPermission(){
         return this.actionPermission;
@@ -66,5 +68,19 @@ public class PermissionCriteria extends  BaseCriteria  {
 
     public void setModelPermissions(List<ModelPermissionCriteria> modelPermissions){
         this.modelPermissions = modelPermissions;
+    }
+    public UtilisateurCriteria getUtilisateur(){
+        return this.utilisateur;
+    }
+
+    public void setUtilisateur(UtilisateurCriteria utilisateur){
+        this.utilisateur = utilisateur;
+    }
+    public List<UtilisateurCriteria> getUtilisateurs(){
+        return this.utilisateurs;
+    }
+
+    public void setUtilisateurs(List<UtilisateurCriteria> utilisateurs){
+        this.utilisateurs = utilisateurs;
     }
 }

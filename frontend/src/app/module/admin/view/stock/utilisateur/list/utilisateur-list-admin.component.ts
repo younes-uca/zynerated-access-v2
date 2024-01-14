@@ -7,12 +7,14 @@ import { environment } from 'src/environments/environment';
 
 import {DroitUtilisateurDto} from 'src/app/controller/model/stock/DroitUtilisateur.model';
 import {DroitUtilisateurAdminService} from 'src/app/controller/service/admin/stock/DroitUtilisateurAdmin.service';
-import {DroitDto} from 'src/app/controller/model/stock/Droit.model';
-import {DroitAdminService} from 'src/app/controller/service/admin/stock/DroitAdmin.service';
 import {ModelPermissionDto} from 'src/app/controller/model/stock/ModelPermission.model';
 import {ModelPermissionAdminService} from 'src/app/controller/service/admin/stock/ModelPermissionAdmin.service';
-import {PermissionDto} from 'src/app/controller/model/stock/Permission.model';
-import {PermissionAdminService} from 'src/app/controller/service/admin/stock/PermissionAdmin.service';
+import {DroitDto} from 'src/app/controller/model/stock/Droit.model';
+import {DroitAdminService} from 'src/app/controller/service/admin/stock/DroitAdmin.service';
+import {ModelPermissionUtilisateurDto} from 'src/app/controller/model/stock/ModelPermissionUtilisateur.model';
+import {ModelPermissionUtilisateurAdminService} from 'src/app/controller/service/admin/stock/ModelPermissionUtilisateurAdmin.service';
+import {ActionPermissionDto} from 'src/app/controller/model/stock/ActionPermission.model';
+import {ActionPermissionAdminService} from 'src/app/controller/service/admin/stock/ActionPermissionAdmin.service';
 
 
 @Component({
@@ -30,7 +32,7 @@ export class UtilisateurListAdminComponent extends AbstractListController<Utilis
      yesOrNoPasswordChanged: any[] = [];
 
 
-    constructor( private utilisateurService: UtilisateurAdminService  , private droitUtilisateurService: DroitUtilisateurAdminService, private droitService: DroitAdminService, private modelPermissionService: ModelPermissionAdminService) {
+    constructor( private utilisateurService: UtilisateurAdminService  , private droitUtilisateurService: DroitUtilisateurAdminService, private modelPermissionService: ModelPermissionAdminService, private droitService: DroitAdminService, private modelPermissionUtilisateurService: ModelPermissionUtilisateurAdminService, private actionPermissionService: ActionPermissionAdminService) {
         super(utilisateurService);
     }
 
@@ -62,8 +64,8 @@ export class UtilisateurListAdminComponent extends AbstractListController<Utilis
 
 
 	public initDuplicate(res: UtilisateurDto) {
-        if (res.modelPermissions != null) {
-             res.modelPermissions.forEach(d => { d.utilisateur = null; d.id = null; });
+        if (res.modelPermissionUtilisateurs != null) {
+             res.modelPermissionUtilisateurs.forEach(d => { d.utilisateur = null; d.id = null; });
         }
         if (res.droitUtilisateurs != null) {
              res.droitUtilisateurs.forEach(d => { d.utilisateur = null; d.id = null; });

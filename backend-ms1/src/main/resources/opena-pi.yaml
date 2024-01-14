@@ -6,183 +6,6 @@ info:
 servers:
   - url: 'https'
 paths:
-  /droitUtilisateurs:
-    get:
-      summary: List all droitUtilisateurs
-      operationId: listDroitUtilisateurs
-      tags:
-        - droitUtilisateurs
-      parameters:
-        - name: limit
-          in: query
-          description: How many items to return at one time (max 100)
-          required: false
-          type: integer
-          format: int32
-      responses:
-        "200":
-          description: A paged array of droitUtilisateurs
-          headers:
-            x-next:
-              type: string
-              description: A link to the next page of responses
-          schema:
-            $ref: '#/definitions/DroitUtilisateurs'
-        default:
-          description: unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-    post:
-      summary: Create a droitUtilisateur
-      operationId: createDroitUtilisateurs
-      tags:
-        - droitUtilisateurs
-      responses:
-        "201":
-          description: Null response
-        default:
-          description: unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-  /droitUtilisateurs/{droitUtilisateurId}:
-    get:
-      summary: Info for a specific droitUtilisateur
-      operationId: showDroitUtilisateurById
-      tags:
-        - droitUtilisateurs
-      parameters:
-        - name: droitUtilisateurId
-          in: path
-          required: true
-          description: The id of the droitUtilisateur to retrieve
-          type: string
-      responses:
-        "200":
-          description: Expected response to a valid request
-          schema:
-            $ref: '#/definitions/DroitUtilisateurs'
-        default:
-          description: unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-  /permissions:
-    get:
-      summary: List all permissions
-      operationId: listPermissions
-      tags:
-        - permissions
-      parameters:
-        - name: limit
-          in: query
-          description: How many items to return at one time (max 100)
-          required: false
-          type: integer
-          format: int32
-      responses:
-        "200":
-          description: A paged array of permissions
-          headers:
-            x-next:
-              type: string
-              description: A link to the next page of responses
-          schema:
-            $ref: '#/definitions/Permissions'
-        default:
-          description: unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-    post:
-      summary: Create a permission
-      operationId: createPermissions
-      tags:
-        - permissions
-      responses:
-        "201":
-          description: Null response
-        default:
-          description: unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-  /permissions/{permissionId}:
-    get:
-      summary: Info for a specific permission
-      operationId: showPermissionById
-      tags:
-        - permissions
-      parameters:
-        - name: permissionId
-          in: path
-          required: true
-          description: The id of the permission to retrieve
-          type: string
-      responses:
-        "200":
-          description: Expected response to a valid request
-          schema:
-            $ref: '#/definitions/Permissions'
-        default:
-          description: unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-  /droits:
-    get:
-      summary: List all droits
-      operationId: listDroits
-      tags:
-        - droits
-      parameters:
-        - name: limit
-          in: query
-          description: How many items to return at one time (max 100)
-          required: false
-          type: integer
-          format: int32
-      responses:
-        "200":
-          description: A paged array of droits
-          headers:
-            x-next:
-              type: string
-              description: A link to the next page of responses
-          schema:
-            $ref: '#/definitions/Droits'
-        default:
-          description: unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-    post:
-      summary: Create a droit
-      operationId: createDroits
-      tags:
-        - droits
-      responses:
-        "201":
-          description: Null response
-        default:
-          description: unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-  /droits/{droitId}:
-    get:
-      summary: Info for a specific droit
-      operationId: showDroitById
-      tags:
-        - droits
-      parameters:
-        - name: droitId
-          in: path
-          required: true
-          description: The id of the droit to retrieve
-          type: string
-      responses:
-        "200":
-          description: Expected response to a valid request
-          schema:
-            $ref: '#/definitions/Droits'
-        default:
-          description: unexpected error
-          schema:
-            $ref: '#/definitions/Error'
   /actionPermissions:
     get:
       summary: List all actionPermissions
@@ -238,6 +61,65 @@ paths:
           description: Expected response to a valid request
           schema:
             $ref: '#/definitions/ActionPermissions'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /modelPermissionUtilisateurs:
+    get:
+      summary: List all modelPermissionUtilisateurs
+      operationId: listModelPermissionUtilisateurs
+      tags:
+        - modelPermissionUtilisateurs
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 100)
+          required: false
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: A paged array of modelPermissionUtilisateurs
+          headers:
+            x-next:
+              type: string
+              description: A link to the next page of responses
+          schema:
+            $ref: '#/definitions/ModelPermissionUtilisateurs'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Create a modelPermissionUtilisateur
+      operationId: createModelPermissionUtilisateurs
+      tags:
+        - modelPermissionUtilisateurs
+      responses:
+        "201":
+          description: Null response
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /modelPermissionUtilisateurs/{modelPermissionUtilisateurId}:
+    get:
+      summary: Info for a specific modelPermissionUtilisateur
+      operationId: showModelPermissionUtilisateurById
+      tags:
+        - modelPermissionUtilisateurs
+      parameters:
+        - name: modelPermissionUtilisateurId
+          in: path
+          required: true
+          description: The id of the modelPermissionUtilisateur to retrieve
+          type: string
+      responses:
+        "200":
+          description: Expected response to a valid request
+          schema:
+            $ref: '#/definitions/ModelPermissionUtilisateurs'
         default:
           description: unexpected error
           schema:
@@ -419,65 +301,6 @@ paths:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
-  /modelPermissions:
-    get:
-      summary: List all modelPermissions
-      operationId: listModelPermissions
-      tags:
-        - modelPermissions
-      parameters:
-        - name: limit
-          in: query
-          description: How many items to return at one time (max 100)
-          required: false
-          type: integer
-          format: int32
-      responses:
-        "200":
-          description: A paged array of modelPermissions
-          headers:
-            x-next:
-              type: string
-              description: A link to the next page of responses
-          schema:
-            $ref: '#/definitions/ModelPermissions'
-        default:
-          description: unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-    post:
-      summary: Create a modelPermission
-      operationId: createModelPermissions
-      tags:
-        - modelPermissions
-      responses:
-        "201":
-          description: Null response
-        default:
-          description: unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-  /modelPermissions/{modelPermissionId}:
-    get:
-      summary: Info for a specific modelPermission
-      operationId: showModelPermissionById
-      tags:
-        - modelPermissions
-      parameters:
-        - name: modelPermissionId
-          in: path
-          required: true
-          description: The id of the modelPermission to retrieve
-          type: string
-      responses:
-        "200":
-          description: Expected response to a valid request
-          schema:
-            $ref: '#/definitions/ModelPermissions'
-        default:
-          description: unexpected error
-          schema:
-            $ref: '#/definitions/Error'
   /achats:
     get:
       summary: List all achats
@@ -533,6 +356,65 @@ paths:
           description: Expected response to a valid request
           schema:
             $ref: '#/definitions/Achats'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /droits:
+    get:
+      summary: List all droits
+      operationId: listDroits
+      tags:
+        - droits
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 100)
+          required: false
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: A paged array of droits
+          headers:
+            x-next:
+              type: string
+              description: A link to the next page of responses
+          schema:
+            $ref: '#/definitions/Droits'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Create a droit
+      operationId: createDroits
+      tags:
+        - droits
+      responses:
+        "201":
+          description: Null response
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /droits/{droitId}:
+    get:
+      summary: Info for a specific droit
+      operationId: showDroitById
+      tags:
+        - droits
+      parameters:
+        - name: droitId
+          in: path
+          required: true
+          description: The id of the droit to retrieve
+          type: string
+      responses:
+        "200":
+          description: Expected response to a valid request
+          schema:
+            $ref: '#/definitions/Droits'
         default:
           description: unexpected error
           schema:
@@ -596,12 +478,12 @@ paths:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
-  /achatItems:
+  /droitUtilisateurs:
     get:
-      summary: List all achatItems
-      operationId: listAchatItems
+      summary: List all droitUtilisateurs
+      operationId: listDroitUtilisateurs
       tags:
-        - achatItems
+        - droitUtilisateurs
       parameters:
         - name: limit
           in: query
@@ -611,22 +493,22 @@ paths:
           format: int32
       responses:
         "200":
-          description: A paged array of achatItems
+          description: A paged array of droitUtilisateurs
           headers:
             x-next:
               type: string
               description: A link to the next page of responses
           schema:
-            $ref: '#/definitions/AchatItems'
+            $ref: '#/definitions/DroitUtilisateurs'
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
     post:
-      summary: Create a achatItem
-      operationId: createAchatItems
+      summary: Create a droitUtilisateur
+      operationId: createDroitUtilisateurs
       tags:
-        - achatItems
+        - droitUtilisateurs
       responses:
         "201":
           description: Null response
@@ -634,23 +516,23 @@ paths:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
-  /achatItems/{achatItemId}:
+  /droitUtilisateurs/{droitUtilisateurId}:
     get:
-      summary: Info for a specific achatItem
-      operationId: showAchatItemById
+      summary: Info for a specific droitUtilisateur
+      operationId: showDroitUtilisateurById
       tags:
-        - achatItems
+        - droitUtilisateurs
       parameters:
-        - name: achatItemId
+        - name: droitUtilisateurId
           in: path
           required: true
-          description: The id of the achatItem to retrieve
+          description: The id of the droitUtilisateur to retrieve
           type: string
       responses:
         "200":
           description: Expected response to a valid request
           schema:
-            $ref: '#/definitions/AchatItems'
+            $ref: '#/definitions/DroitUtilisateurs'
         default:
           description: unexpected error
           schema:
@@ -714,52 +596,128 @@ paths:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
+  /modelPermissions:
+    get:
+      summary: List all modelPermissions
+      operationId: listModelPermissions
+      tags:
+        - modelPermissions
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 100)
+          required: false
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: A paged array of modelPermissions
+          headers:
+            x-next:
+              type: string
+              description: A link to the next page of responses
+          schema:
+            $ref: '#/definitions/ModelPermissions'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Create a modelPermission
+      operationId: createModelPermissions
+      tags:
+        - modelPermissions
+      responses:
+        "201":
+          description: Null response
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /modelPermissions/{modelPermissionId}:
+    get:
+      summary: Info for a specific modelPermission
+      operationId: showModelPermissionById
+      tags:
+        - modelPermissions
+      parameters:
+        - name: modelPermissionId
+          in: path
+          required: true
+          description: The id of the modelPermission to retrieve
+          type: string
+      responses:
+        "200":
+          description: Expected response to a valid request
+          schema:
+            $ref: '#/definitions/ModelPermissions'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /achatItems:
+    get:
+      summary: List all achatItems
+      operationId: listAchatItems
+      tags:
+        - achatItems
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 100)
+          required: false
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: A paged array of achatItems
+          headers:
+            x-next:
+              type: string
+              description: A link to the next page of responses
+          schema:
+            $ref: '#/definitions/AchatItems'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Create a achatItem
+      operationId: createAchatItems
+      tags:
+        - achatItems
+      responses:
+        "201":
+          description: Null response
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /achatItems/{achatItemId}:
+    get:
+      summary: Info for a specific achatItem
+      operationId: showAchatItemById
+      tags:
+        - achatItems
+      parameters:
+        - name: achatItemId
+          in: path
+          required: true
+          description: The id of the achatItem to retrieve
+          type: string
+      responses:
+        "200":
+          description: Expected response to a valid request
+          schema:
+            $ref: '#/definitions/AchatItems'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
   
 
 
 definitions:
-  DroitUtilisateur:
-    type: "object"
-    required:
-      - id
-    properties:
-      id:
-        type: int
-  DroitUtilisateurs:
-    type: array
-    items:
-      $ref: '#/definitions/DroitUtilisateur'
-  Permission:
-    type: "object"
-    required:
-      - id
-      - subAttribute
-      - value
-    properties:
-      id:
-        type: int
-      subAttribute:
-        type: string
-      value:
-        type: boolean
-  Permissions:
-    type: array
-    items:
-      $ref: '#/definitions/Permission'
-  Droit:
-    type: "object"
-    required:
-      - id
-      - authority
-    properties:
-      id:
-        type: int
-      authority:
-        type: string
-  Droits:
-    type: array
-    items:
-      $ref: '#/definitions/Droit'
   ActionPermission:
     type: "object"
     required:
@@ -777,6 +735,23 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ActionPermission'
+  ModelPermissionUtilisateur:
+    type: "object"
+    required:
+      - id
+      - value
+      - subAttribute
+    properties:
+      id:
+        type: int
+      value:
+        type: boolean
+      subAttribute:
+        type: string
+  ModelPermissionUtilisateurs:
+    type: array
+    items:
+      $ref: '#/definitions/ModelPermissionUtilisateur'
   PaiementAchat:
     type: "object"
     required:
@@ -849,23 +824,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Produit'
-  ModelPermission:
-    type: "object"
-    required:
-      - id
-      - reference
-      - libelle
-    properties:
-      id:
-        type: int
-      reference:
-        type: string
-      libelle:
-        type: string
-  ModelPermissions:
-    type: array
-    items:
-      $ref: '#/definitions/ModelPermission'
   Achat:
     type: "object"
     required:
@@ -892,6 +850,20 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Achat'
+  Droit:
+    type: "object"
+    required:
+      - id
+      - authority
+    properties:
+      id:
+        type: int
+      authority:
+        type: string
+  Droits:
+    type: array
+    items:
+      $ref: '#/definitions/Droit'
   Client:
     type: "object"
     required:
@@ -924,32 +896,17 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Client'
-  AchatItem:
+  DroitUtilisateur:
     type: "object"
     required:
       - id
-      - prixUnitaire
-      - prixVente
-      - quantite
-      - quantiteAvoir
-      - remise
     properties:
       id:
         type: int
-      prixUnitaire:
-        type: number
-      prixVente:
-        type: number
-      quantite:
-        type: number
-      quantiteAvoir:
-        type: number
-      remise:
-        type: number
-  AchatItems:
+  DroitUtilisateurs:
     type: array
     items:
-      $ref: '#/definitions/AchatItem'
+      $ref: '#/definitions/DroitUtilisateur'
   Utilisateur:
     type: "object"
     required:
@@ -985,6 +942,49 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Utilisateur'
+  ModelPermission:
+    type: "object"
+    required:
+      - id
+      - reference
+      - libelle
+    properties:
+      id:
+        type: int
+      reference:
+        type: string
+      libelle:
+        type: string
+  ModelPermissions:
+    type: array
+    items:
+      $ref: '#/definitions/ModelPermission'
+  AchatItem:
+    type: "object"
+    required:
+      - id
+      - prixUnitaire
+      - prixVente
+      - quantite
+      - quantiteAvoir
+      - remise
+    properties:
+      id:
+        type: int
+      prixUnitaire:
+        type: number
+      prixVente:
+        type: number
+      quantite:
+        type: number
+      quantiteAvoir:
+        type: number
+      remise:
+        type: number
+  AchatItems:
+    type: array
+    items:
+      $ref: '#/definitions/AchatItem'
 
   Error:
     type: "object"

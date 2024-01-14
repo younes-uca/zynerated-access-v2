@@ -1,7 +1,7 @@
 import {BaseDto} from 'src/app/zynerator/dto/BaseDto.model';
 
 import {DroitUtilisateurDto} from './DroitUtilisateur.model';
-import {ModelPermissionDto} from './ModelPermission.model';
+import {ModelPermissionUtilisateurDto} from './ModelPermissionUtilisateur.model';
 
 export class UtilisateurDto extends BaseDto{
 
@@ -21,7 +21,7 @@ export class UtilisateurDto extends BaseDto{
 
    public passwordChanged: null | boolean;
 
-     public modelPermissions: Array<ModelPermissionDto>;
+     public modelPermissionUtilisateurs: Array<ModelPermissionUtilisateurDto>;
      public droitUtilisateurs: Array<DroitUtilisateurDto>;
     
 
@@ -36,7 +36,7 @@ export class UtilisateurDto extends BaseDto{
         this.username = '';
         this.password = '';
         this.passwordChanged = null;
-        this.modelPermissions = new Array<ModelPermissionDto>();
+        this.modelPermissionUtilisateurs = new Array<ModelPermissionUtilisateurDto>();
         this.droitUtilisateurs = new Array<DroitUtilisateurDto>();
 
         }

@@ -1,5 +1,4 @@
 import {BaseCriteria} from 'src/app/zynerator/criteria/BaseCriteria.model';
-import {PermissionCriteria} from './PermissionCriteria.model';
 
 export class ModelPermissionCriteria  extends BaseCriteria  {
 
@@ -8,6 +7,5 @@ export class ModelPermissionCriteria  extends BaseCriteria  {
     public referenceLike: string;
     public libelle: string;
     public libelleLike: string;
-      public permissions: Array<PermissionCriteria>;
 
 }

@@ -1,7 +1,6 @@
 package ma.zs.easystock.bean.core.stock;
 
 import java.util.Objects;
-import java.util.List;
 
 
 
@@ -31,7 +30,6 @@ public class ModelPermission   extends AuditBusinessObject     {
     private String libelle;
 
 
-    private List<Permission> permissions ;
 
     public ModelPermission(){
         super();
@@ -68,14 +66,6 @@ public class ModelPermission   extends AuditBusinessObject     {
     }
     public void setLibelle(String libelle){
         this.libelle = libelle;
-    }
-    @OneToMany(mappedBy = "modelPermission")
-
-    public List<Permission> getPermissions(){
-        return this.permissions;
-    }
-    public void setPermissions(List<Permission> permissions){
-        this.permissions = permissions;
     }
 
     @Transient

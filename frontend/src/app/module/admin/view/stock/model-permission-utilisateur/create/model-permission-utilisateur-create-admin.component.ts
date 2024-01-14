@@ -2,26 +2,28 @@ import {Component, OnInit, Input} from '@angular/core';
 
 import { AbstractCreateController } from 'src/app/zynerator/controller/AbstractCreateController';
 
-import {PermissionAdminService} from 'src/app/controller/service/admin/stock/PermissionAdmin.service';
-import {PermissionDto} from 'src/app/controller/model/stock/Permission.model';
-import {PermissionCriteria} from 'src/app/controller/criteria/stock/PermissionCriteria.model';
-import {ActionPermissionDto} from 'src/app/controller/model/stock/ActionPermission.model';
-import {ActionPermissionAdminService} from 'src/app/controller/service/admin/stock/ActionPermissionAdmin.service';
+import {ModelPermissionUtilisateurAdminService} from 'src/app/controller/service/admin/stock/ModelPermissionUtilisateurAdmin.service';
+import {ModelPermissionUtilisateurDto} from 'src/app/controller/model/stock/ModelPermissionUtilisateur.model';
+import {ModelPermissionUtilisateurCriteria} from 'src/app/controller/criteria/stock/ModelPermissionUtilisateurCriteria.model';
 import {ModelPermissionDto} from 'src/app/controller/model/stock/ModelPermission.model';
 import {ModelPermissionAdminService} from 'src/app/controller/service/admin/stock/ModelPermissionAdmin.service';
+import {UtilisateurDto} from 'src/app/controller/model/stock/Utilisateur.model';
+import {UtilisateurAdminService} from 'src/app/controller/service/admin/stock/UtilisateurAdmin.service';
+import {ActionPermissionDto} from 'src/app/controller/model/stock/ActionPermission.model';
+import {ActionPermissionAdminService} from 'src/app/controller/service/admin/stock/ActionPermissionAdmin.service';
 @Component({
-  selector: 'app-permission-create-admin',
-  templateUrl: './permission-create-admin.component.html'
+  selector: 'app-model-permission-utilisateur-create-admin',
+  templateUrl: './model-permission-utilisateur-create-admin.component.html'
 })
-export class PermissionCreateAdminComponent extends AbstractCreateController<PermissionDto, PermissionCriteria, PermissionAdminService>  implements OnInit {
+export class ModelPermissionUtilisateurCreateAdminComponent extends AbstractCreateController<ModelPermissionUtilisateurDto, ModelPermissionUtilisateurCriteria, ModelPermissionUtilisateurAdminService>  implements OnInit {
 
 
 
     private _validActionPermissionReference = true;
     private _validModelPermissionReference = true;
 
-    constructor( private permissionService: PermissionAdminService , private actionPermissionService: ActionPermissionAdminService, private modelPermissionService: ModelPermissionAdminService) {
-        super(permissionService);
+    constructor( private modelPermissionUtilisateurService: ModelPermissionUtilisateurAdminService , private modelPermissionService: ModelPermissionAdminService, private utilisateurService: UtilisateurAdminService, private actionPermissionService: ActionPermissionAdminService) {
+        super(modelPermissionUtilisateurService);
     }
 
     ngOnInit(): void {
@@ -29,6 +31,8 @@ export class PermissionCreateAdminComponent extends AbstractCreateController<Per
         this.actionPermissionService.findAll().subscribe((data) => this.actionPermissions = data);
         this.modelPermission = new ModelPermissionDto();
         this.modelPermissionService.findAll().subscribe((data) => this.modelPermissions = data);
+        this.utilisateur = new UtilisateurDto();
+        this.utilisateurService.findAll().subscribe((data) => this.utilisateurs = data);
     }
 
 
@@ -46,6 +50,17 @@ export class PermissionCreateAdminComponent extends AbstractCreateController<Per
 
 
 
+    public async openCreateUtilisateur(utilisateur: string) {
+    const isPermistted = await this.roleService.isPermitted('Utilisateur', 'add');
+    if(isPermistted) {
+         this.utilisateur = new UtilisateurDto();
+         this.createUtilisateurDialog = true;
+    }else{
+        this.messageService.add({
+        severity: 'error', summary: 'erreur', detail: 'problème de permission'
+        });
+     }
+    }
     public async openCreateModelPermission(modelPermission: string) {
     const isPermistted = await this.roleService.isPermitted('ModelPermission', 'add');
     if(isPermistted) {
@@ -69,6 +84,24 @@ export class PermissionCreateAdminComponent extends AbstractCreateController<Per
      }
     }
 
+    get utilisateur(): UtilisateurDto {
+        return this.utilisateurService.item;
+    }
+    set utilisateur(value: UtilisateurDto) {
+        this.utilisateurService.item = value;
+    }
+    get utilisateurs(): Array<UtilisateurDto> {
+        return this.utilisateurService.items;
+    }
+    set utilisateurs(value: Array<UtilisateurDto>) {
+        this.utilisateurService.items = value;
+    }
+    get createUtilisateurDialog(): boolean {
+       return this.utilisateurService.createDialog;
+    }
+    set createUtilisateurDialog(value: boolean) {
+        this.utilisateurService.createDialog= value;
+    }
     get modelPermission(): ModelPermissionDto {
         return this.modelPermissionService.item;
     }

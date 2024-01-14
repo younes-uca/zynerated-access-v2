@@ -5,9 +5,10 @@ import org.springframework.stereotype.Component;
 import ma.zs.easystock.zynerator.util.ListUtil;
 
 import ma.zs.easystock.ws.converter.stock.DroitUtilisateurConverter;
-import ma.zs.easystock.ws.converter.stock.DroitConverter;
 import ma.zs.easystock.ws.converter.stock.ModelPermissionConverter;
-import ma.zs.easystock.ws.converter.stock.PermissionConverter;
+import ma.zs.easystock.ws.converter.stock.DroitConverter;
+import ma.zs.easystock.ws.converter.stock.ModelPermissionUtilisateurConverter;
+import ma.zs.easystock.ws.converter.stock.ActionPermissionConverter;
 
 
 
@@ -23,21 +24,24 @@ public class UtilisateurConverter extends AbstractConverter<Utilisateur, Utilisa
     @Autowired
     private DroitUtilisateurConverter droitUtilisateurConverter ;
     @Autowired
-    private DroitConverter droitConverter ;
-    @Autowired
     private ModelPermissionConverter modelPermissionConverter ;
     @Autowired
-    private PermissionConverter permissionConverter ;
-    private boolean modelPermissions;
+    private DroitConverter droitConverter ;
+    @Autowired
+    private ModelPermissionUtilisateurConverter modelPermissionUtilisateurConverter ;
+    @Autowired
+    private ActionPermissionConverter actionPermissionConverter ;
+    private boolean modelPermissionUtilisateurs;
     private boolean droitUtilisateurs;
 
-    public  UtilisateurConverter(){//DroitUtilisateur droitUtilisateurDroit droitModelPermission modelPermissionPermission permission){
+    public  UtilisateurConverter(){//DroitUtilisateur droitUtilisateurModelPermission modelPermissionDroit droitModelPermissionUtilisateur modelPermissionUtilisateurActionPermission actionPermission,){
         super(Utilisateur.class, UtilisateurDto.class);
         init(true);
         //this.droitUtilisateur =  droitUtilisateur ;
-        //this.droit =  droit ;
         //this.modelPermission =  modelPermission ;
-        //this.permission =  permission ;
+        //this.droit =  droit ;
+        //this.modelPermissionUtilisateur =  modelPermissionUtilisateur ;
+        //this.actionPermission =  actionPermission ;
     }
 
     @Override
@@ -65,8 +69,8 @@ public class UtilisateurConverter extends AbstractConverter<Utilisateur, Utilisa
             if(dto.getPasswordChanged() != null)
                 item.setPasswordChanged(dto.getPasswordChanged());
 
-            if(this.modelPermissions && ListUtil.isNotEmpty(dto.getModelPermissions()))
-                item.setModelPermissions(modelPermissionConverter.toItem(dto.getModelPermissions()));
+            if(this.modelPermissionUtilisateurs && ListUtil.isNotEmpty(dto.getModelPermissionUtilisateurs()))
+                item.setModelPermissionUtilisateurs(modelPermissionUtilisateurConverter.toItem(dto.getModelPermissionUtilisateurs()));
             if(this.droitUtilisateurs && ListUtil.isNotEmpty(dto.getDroitUtilisateurs()))
                 item.setDroitUtilisateurs(droitUtilisateurConverter.toItem(dto.getDroitUtilisateurs()));
 
@@ -99,11 +103,11 @@ public class UtilisateurConverter extends AbstractConverter<Utilisateur, Utilisa
                 dto.setPassword(item.getPassword());
             if(StringUtil.isNotEmpty(item.getPasswordChanged()))
                 dto.setPasswordChanged(item.getPasswordChanged());
-        if(this.modelPermissions && ListUtil.isNotEmpty(item.getModelPermissions())){
-            modelPermissionConverter.init(true);
-            modelPermissionConverter.setUtilisateur(false);
-            dto.setModelPermissions(modelPermissionConverter.toDto(item.getModelPermissions()));
-            modelPermissionConverter.setUtilisateur(true);
+        if(this.modelPermissionUtilisateurs && ListUtil.isNotEmpty(item.getModelPermissionUtilisateurs())){
+            modelPermissionUtilisateurConverter.init(true);
+            modelPermissionUtilisateurConverter.setUtilisateur(false);
+            dto.setModelPermissionUtilisateurs(modelPermissionUtilisateurConverter.toDto(item.getModelPermissionUtilisateurs()));
+            modelPermissionUtilisateurConverter.setUtilisateur(true);
 
         }
         if(this.droitUtilisateurs && ListUtil.isNotEmpty(item.getDroitUtilisateurs())){
@@ -120,7 +124,7 @@ public class UtilisateurConverter extends AbstractConverter<Utilisateur, Utilisa
     }
 
     public void initList(boolean value) {
-        this.modelPermissions = value;
+        this.modelPermissionUtilisateurs = value;
         this.droitUtilisateurs = value;
     }
 
@@ -134,29 +138,35 @@ public class UtilisateurConverter extends AbstractConverter<Utilisateur, Utilisa
     public void setDroitUtilisateurConverter(DroitUtilisateurConverter droitUtilisateurConverter ){
         this.droitUtilisateurConverter = droitUtilisateurConverter;
     }
-    public DroitConverter getDroitConverter(){
-        return this.droitConverter;
-    }
-    public void setDroitConverter(DroitConverter droitConverter ){
-        this.droitConverter = droitConverter;
-    }
     public ModelPermissionConverter getModelPermissionConverter(){
         return this.modelPermissionConverter;
     }
     public void setModelPermissionConverter(ModelPermissionConverter modelPermissionConverter ){
         this.modelPermissionConverter = modelPermissionConverter;
     }
-    public PermissionConverter getPermissionConverter(){
-        return this.permissionConverter;
+    public DroitConverter getDroitConverter(){
+        return this.droitConverter;
     }
-    public void setPermissionConverter(PermissionConverter permissionConverter ){
-        this.permissionConverter = permissionConverter;
+    public void setDroitConverter(DroitConverter droitConverter ){
+        this.droitConverter = droitConverter;
     }
-    public boolean  isModelPermissions(){
-        return this.modelPermissions ;
+    public ModelPermissionUtilisateurConverter getModelPermissionUtilisateurConverter(){
+        return this.modelPermissionUtilisateurConverter;
     }
-    public void  setModelPermissions(boolean modelPermissions ){
-        this.modelPermissions  = modelPermissions ;
+    public void setModelPermissionUtilisateurConverter(ModelPermissionUtilisateurConverter modelPermissionUtilisateurConverter ){
+        this.modelPermissionUtilisateurConverter = modelPermissionUtilisateurConverter;
+    }
+    public ActionPermissionConverter getActionPermissionConverter(){
+        return this.actionPermissionConverter;
+    }
+    public void setActionPermissionConverter(ActionPermissionConverter actionPermissionConverter ){
+        this.actionPermissionConverter = actionPermissionConverter;
+    }
+    public boolean  isModelPermissionUtilisateurs(){
+        return this.modelPermissionUtilisateurs ;
+    }
+    public void  setModelPermissionUtilisateurs(boolean modelPermissionUtilisateurs ){
+        this.modelPermissionUtilisateurs  = modelPermissionUtilisateurs ;
     }
     public boolean  isDroitUtilisateurs(){
         return this.droitUtilisateurs ;

@@ -105,12 +105,6 @@ public class ModelPermissionRestAdmin  extends AbstractController<ModelPermissio
      }
 
 
-    @Operation(summary = "Finds a modelPermission and associated list by id")
-    @GetMapping("detail/id/{id}")
-    public ResponseEntity<ModelPermissionDto> findWithAssociatedLists(@PathVariable Long id) {
-        return super.findWithAssociatedLists(id);
-    }
-
     @Operation(summary = "Finds modelPermissions by criteria")
     @PostMapping("find-by-criteria")
     public ResponseEntity<List<ModelPermissionDto>> findByCriteria(@RequestBody ModelPermissionCriteria criteria) throws Exception {

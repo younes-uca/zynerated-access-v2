@@ -97,11 +97,6 @@ export class AppMenuComponent implements OnInit {
                 icon: 'pi pi-wallet',
                 items: [
                           {
-                            label: 'Liste permission',
-                            icon: 'pi pi-fw pi-plus-circle',
-                            routerLink: ['/app/admin/stock/permission/list']
-                          },
-                          {
                             label: 'Liste produit',
                             icon: 'pi pi-fw pi-plus-circle',
                             routerLink: ['/app/admin/stock/produit/list']

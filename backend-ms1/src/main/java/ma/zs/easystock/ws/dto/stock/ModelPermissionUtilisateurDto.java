@@ -9,29 +9,22 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class PermissionDto  extends AuditBaseDto {
+public class ModelPermissionUtilisateurDto  extends AuditBaseDto {
 
-    private String subAttribute  ;
     private Boolean value  ;
+    private String subAttribute  ;
 
     private ActionPermissionDto actionPermission ;
     private ModelPermissionDto modelPermission ;
+    private UtilisateurDto utilisateur ;
 
 
 
-    public PermissionDto(){
+    public ModelPermissionUtilisateurDto(){
         super();
     }
 
 
-
-    @Log
-    public String getSubAttribute(){
-        return this.subAttribute;
-    }
-    public void setSubAttribute(String subAttribute){
-        this.subAttribute = subAttribute;
-    }
 
     @Log
     public Boolean getValue(){
@@ -39,6 +32,14 @@ public class PermissionDto  extends AuditBaseDto {
     }
     public void setValue(Boolean value){
         this.value = value;
+    }
+
+    @Log
+    public String getSubAttribute(){
+        return this.subAttribute;
+    }
+    public void setSubAttribute(String subAttribute){
+        this.subAttribute = subAttribute;
     }
 
 
@@ -55,6 +56,13 @@ public class PermissionDto  extends AuditBaseDto {
 
     public void setModelPermission(ModelPermissionDto modelPermission){
         this.modelPermission = modelPermission;
+    }
+    public UtilisateurDto getUtilisateur(){
+        return this.utilisateur;
+    }
+
+    public void setUtilisateur(UtilisateurDto utilisateur){
+        this.utilisateur = utilisateur;
     }
 
 

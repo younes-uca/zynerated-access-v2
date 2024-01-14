@@ -5,10 +5,6 @@ import {ModelPermissionCriteria} from 'src/app/controller/criteria/stock/ModelPe
 import {AbstractListController} from 'src/app/zynerator/controller/AbstractListController';
 import { environment } from 'src/environments/environment';
 
-import {ActionPermissionDto} from 'src/app/controller/model/stock/ActionPermission.model';
-import {ActionPermissionAdminService} from 'src/app/controller/service/admin/stock/ActionPermissionAdmin.service';
-import {PermissionDto} from 'src/app/controller/model/stock/Permission.model';
-import {PermissionAdminService} from 'src/app/controller/service/admin/stock/PermissionAdmin.service';
 
 
 @Component({
@@ -21,7 +17,7 @@ export class ModelPermissionListAdminComponent extends AbstractListController<Mo
 
 
 
-    constructor( private modelPermissionService: ModelPermissionAdminService  , private actionPermissionService: ActionPermissionAdminService, private permissionService: PermissionAdminService) {
+    constructor( private modelPermissionService: ModelPermissionAdminService  ) {
         super(modelPermissionService);
     }
 
@@ -41,11 +37,6 @@ export class ModelPermissionListAdminComponent extends AbstractListController<Mo
 
 
 
-	public initDuplicate(res: ModelPermissionDto) {
-        if (res.permissions != null) {
-             res.permissions.forEach(d => { d.modelPermission = null; d.id = null; });
-        }
-	}
 
 
    public prepareColumnExport(): void {

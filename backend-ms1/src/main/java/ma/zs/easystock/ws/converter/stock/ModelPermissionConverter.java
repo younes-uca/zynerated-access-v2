@@ -2,10 +2,7 @@ package  ma.zs.easystock.ws.converter.stock;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ma.zs.easystock.zynerator.util.ListUtil;
 
-import ma.zs.easystock.ws.converter.stock.ActionPermissionConverter;
-import ma.zs.easystock.ws.converter.stock.PermissionConverter;
 
 
 
@@ -18,17 +15,9 @@ import ma.zs.easystock.ws.dto.stock.ModelPermissionDto;
 @Component
 public class ModelPermissionConverter extends AbstractConverter<ModelPermission, ModelPermissionDto> {
 
-    @Autowired
-    private ActionPermissionConverter actionPermissionConverter ;
-    @Autowired
-    private PermissionConverter permissionConverter ;
-    private boolean permissions;
 
-    public  ModelPermissionConverter(){//ActionPermission actionPermissionPermission permission){
+    public  ModelPermissionConverter(){//){
         super(ModelPermission.class, ModelPermissionDto.class);
-        init(true);
-        //this.actionPermission =  actionPermission ;
-        //this.permission =  permission ;
     }
 
     @Override
@@ -44,8 +33,6 @@ public class ModelPermissionConverter extends AbstractConverter<ModelPermission,
             if(StringUtil.isNotEmpty(dto.getLibelle()))
                 item.setLibelle(dto.getLibelle());
 
-            if(this.permissions && ListUtil.isNotEmpty(dto.getPermissions()))
-                item.setPermissions(permissionConverter.toItem(dto.getPermissions()));
 
 
         return item;
@@ -64,43 +51,15 @@ public class ModelPermissionConverter extends AbstractConverter<ModelPermission,
                 dto.setReference(item.getReference());
             if(StringUtil.isNotEmpty(item.getLibelle()))
                 dto.setLibelle(item.getLibelle());
-        if(this.permissions && ListUtil.isNotEmpty(item.getPermissions())){
-            permissionConverter.init(true);
-            permissionConverter.setModelPermission(false);
-            dto.setPermissions(permissionConverter.toDto(item.getPermissions()));
-            permissionConverter.setModelPermission(true);
-
-        }
 
 
         return dto;
         }
     }
 
-    public void initList(boolean value) {
-        this.permissions = value;
-    }
 
     public void initObject(boolean value) {
     }
 
 
-    public ActionPermissionConverter getActionPermissionConverter(){
-        return this.actionPermissionConverter;
-    }
-    public void setActionPermissionConverter(ActionPermissionConverter actionPermissionConverter ){
-        this.actionPermissionConverter = actionPermissionConverter;
-    }
-    public PermissionConverter getPermissionConverter(){
-        return this.permissionConverter;
-    }
-    public void setPermissionConverter(PermissionConverter permissionConverter ){
-        this.permissionConverter = permissionConverter;
-    }
-    public boolean  isPermissions(){
-        return this.permissions ;
-    }
-    public void  setPermissions(boolean permissions ){
-        this.permissions  = permissions ;
-    }
 }

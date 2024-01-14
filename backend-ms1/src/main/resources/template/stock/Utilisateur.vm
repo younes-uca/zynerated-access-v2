@@ -132,23 +132,27 @@
 
     </table>
     <br/><br/><br/><br/><br/>
-    <h1>Model permissions</h1>
+    <h1>Model permission utilisateurs</h1>
     <table>
         <thead>
             <tr>
-                <th>Reference</th>
-                <th>Libelle</th>
+                <th>Action permission</th>
+                <th>Model permission</th>
+                <th>Value</th>
+                <th>Sub attribute</th>
             </tr>
         </thead>
         <tbody>
-                #foreach( $item in $modelPermissions )
+                #foreach( $item in $modelPermissionUtilisateurs )
                 #if( ($foreach.index % 2) == 0 )
                 <tr style="background-color: #f4f5f6">
                     #else
                 <tr style="background-color: #e9ebec">
                     #end
-                    <td>#displayDataIfNotNull($item.reference)</td>
-                    <td>#displayDataIfNotNull($item.libelle)</td>
+                    <td>#displayDataIfNotNull($item.actionPermission,$item.actionPermission.reference)</td>
+                    <td>#displayDataIfNotNull($item.modelPermission,$item.modelPermission.reference)</td>
+                    <td>#displayDataIfNotNull($item.value)</td>
+                    <td>#displayDataIfNotNull($item.subAttribute)</td>
                 </tr>
                 #end
         </tbody>

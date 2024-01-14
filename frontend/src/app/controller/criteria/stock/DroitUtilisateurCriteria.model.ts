@@ -1,6 +1,6 @@
 import {BaseCriteria} from 'src/app/zynerator/criteria/BaseCriteria.model';
-import {UtilisateurCriteria} from './UtilisateurCriteria.model';
 import {DroitCriteria} from './DroitCriteria.model';
+import {UtilisateurCriteria} from './UtilisateurCriteria.model';
 
 export class DroitUtilisateurCriteria  extends BaseCriteria  {
 

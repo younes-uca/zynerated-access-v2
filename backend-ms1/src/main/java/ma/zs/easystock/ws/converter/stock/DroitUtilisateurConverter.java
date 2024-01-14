@@ -3,8 +3,8 @@ package  ma.zs.easystock.ws.converter.stock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import ma.zs.easystock.ws.converter.stock.UtilisateurConverter;
 import ma.zs.easystock.ws.converter.stock.DroitConverter;
+import ma.zs.easystock.ws.converter.stock.UtilisateurConverter;
 
 import ma.zs.easystock.bean.core.stock.Utilisateur;
 
@@ -19,16 +19,16 @@ import ma.zs.easystock.ws.dto.stock.DroitUtilisateurDto;
 public class DroitUtilisateurConverter extends AbstractConverter<DroitUtilisateur, DroitUtilisateurDto> {
 
     @Autowired
-    private UtilisateurConverter utilisateurConverter ;
-    @Autowired
     private DroitConverter droitConverter ;
+    @Autowired
+    private UtilisateurConverter utilisateurConverter ;
     private boolean droit;
     private boolean utilisateur;
 
-    public  DroitUtilisateurConverter(){//Utilisateur utilisateurDroit droit,){
+    public  DroitUtilisateurConverter(){//Droit droitUtilisateur utilisateur,){
         super(DroitUtilisateur.class, DroitUtilisateurDto.class);
-        //this.utilisateur =  utilisateur ;
         //this.droit =  droit ;
+        //this.utilisateur =  utilisateur ;
     }
 
     @Override
@@ -82,17 +82,17 @@ public class DroitUtilisateurConverter extends AbstractConverter<DroitUtilisateu
     }
 
 
-    public UtilisateurConverter getUtilisateurConverter(){
-        return this.utilisateurConverter;
-    }
-    public void setUtilisateurConverter(UtilisateurConverter utilisateurConverter ){
-        this.utilisateurConverter = utilisateurConverter;
-    }
     public DroitConverter getDroitConverter(){
         return this.droitConverter;
     }
     public void setDroitConverter(DroitConverter droitConverter ){
         this.droitConverter = droitConverter;
+    }
+    public UtilisateurConverter getUtilisateurConverter(){
+        return this.utilisateurConverter;
+    }
+    public void setUtilisateurConverter(UtilisateurConverter utilisateurConverter ){
+        this.utilisateurConverter = utilisateurConverter;
     }
     public boolean  isDroit(){
         return this.droit;

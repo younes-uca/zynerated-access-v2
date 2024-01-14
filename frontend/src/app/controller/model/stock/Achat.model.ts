@@ -1,8 +1,8 @@
 import {BaseDto} from 'src/app/zynerator/dto/BaseDto.model';
 
+import {AchatItemDto} from './AchatItem.model';
 import {PaiementAchatDto} from './PaiementAchat.model';
 import {ClientDto} from './Client.model';
-import {AchatItemDto} from './AchatItem.model';
 
 export class AchatDto extends BaseDto{
 

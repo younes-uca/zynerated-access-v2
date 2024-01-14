@@ -7,30 +7,35 @@ import {UtilisateurDto} from 'src/app/controller/model/stock/Utilisateur.model';
 import {UtilisateurCriteria} from 'src/app/controller/criteria/stock/UtilisateurCriteria.model';
 import {DroitUtilisateurDto} from 'src/app/controller/model/stock/DroitUtilisateur.model';
 import {DroitUtilisateurAdminService} from 'src/app/controller/service/admin/stock/DroitUtilisateurAdmin.service';
-import {DroitDto} from 'src/app/controller/model/stock/Droit.model';
-import {DroitAdminService} from 'src/app/controller/service/admin/stock/DroitAdmin.service';
 import {ModelPermissionDto} from 'src/app/controller/model/stock/ModelPermission.model';
 import {ModelPermissionAdminService} from 'src/app/controller/service/admin/stock/ModelPermissionAdmin.service';
-import {PermissionDto} from 'src/app/controller/model/stock/Permission.model';
-import {PermissionAdminService} from 'src/app/controller/service/admin/stock/PermissionAdmin.service';
+import {DroitDto} from 'src/app/controller/model/stock/Droit.model';
+import {DroitAdminService} from 'src/app/controller/service/admin/stock/DroitAdmin.service';
+import {ModelPermissionUtilisateurDto} from 'src/app/controller/model/stock/ModelPermissionUtilisateur.model';
+import {ModelPermissionUtilisateurAdminService} from 'src/app/controller/service/admin/stock/ModelPermissionUtilisateurAdmin.service';
+import {ActionPermissionDto} from 'src/app/controller/model/stock/ActionPermission.model';
+import {ActionPermissionAdminService} from 'src/app/controller/service/admin/stock/ActionPermissionAdmin.service';
 @Component({
   selector: 'app-utilisateur-create-admin',
   templateUrl: './utilisateur-create-admin.component.html'
 })
 export class UtilisateurCreateAdminComponent extends AbstractCreateController<UtilisateurDto, UtilisateurCriteria, UtilisateurAdminService>  implements OnInit {
 
-    private _modelPermissionsElement = new ModelPermissionDto();
+    private _modelPermissionUtilisateursElement = new ModelPermissionUtilisateurDto();
     private _droitUtilisateursElement = new DroitUtilisateurDto();
 
 
-    private _validModelPermissionsReference = true;
     private _droitUtilisateurs: Array<DroitUtilisateurDto> = [];
 
-    constructor( private utilisateurService: UtilisateurAdminService , private droitUtilisateurService: DroitUtilisateurAdminService, private droitService: DroitAdminService, private modelPermissionService: ModelPermissionAdminService) {
+    constructor( private utilisateurService: UtilisateurAdminService , private droitUtilisateurService: DroitUtilisateurAdminService, private modelPermissionService: ModelPermissionAdminService, private droitService: DroitAdminService, private modelPermissionUtilisateurService: ModelPermissionUtilisateurAdminService, private actionPermissionService: ActionPermissionAdminService) {
         super(utilisateurService);
     }
 
     ngOnInit(): void {
+        this.modelPermissionUtilisateursElement.actionPermission = new ActionPermissionDto();
+        this.actionPermissionService.findAll().subscribe((data) => this.actionPermissions = data);
+        this.modelPermissionUtilisateursElement.modelPermission = new ModelPermissionDto();
+        this.modelPermissionService.findAll().subscribe((data) => this.modelPermissions = data);
         this.droitService.findAll().subscribe(data => this.prepareDroitUtilisateurs(data));
         this.droitUtilisateursElement.droit = new DroitDto();
         this.droitService.findAll().subscribe((data) => this.droits = data);
@@ -47,37 +52,35 @@ export class UtilisateurCreateAdminComponent extends AbstractCreateController<Ut
         }
     }
 
-    validateModelPermissions(){
+    validateModelPermissionUtilisateurs(){
         this.errorMessages = new Array();
-        this.validateModelPermissionsReference();
     }
 
 
     public setValidation(value: boolean){
-        this.validModelPermissionsReference = value;
     }
 
-    public addModelPermissions() {
-        if( this.item.modelPermissions == null )
-            this.item.modelPermissions = new Array<ModelPermissionDto>();
-       this.validateModelPermissions();
+    public addModelPermissionUtilisateurs() {
+        if( this.item.modelPermissionUtilisateurs == null )
+            this.item.modelPermissionUtilisateurs = new Array<ModelPermissionUtilisateurDto>();
+       this.validateModelPermissionUtilisateurs();
        if (this.errorMessages.length === 0) {
-              this.item.modelPermissions.push({... this.modelPermissionsElement});
-              this.modelPermissionsElement = new ModelPermissionDto();
+              this.item.modelPermissionUtilisateurs.push({... this.modelPermissionUtilisateursElement});
+              this.modelPermissionUtilisateursElement = new ModelPermissionUtilisateurDto();
        }else{
             this.messageService.add({severity: 'error',summary: 'Erreurs',detail: 'Merci de corrigé les erreurs suivant : ' + this.errorMessages});
        }
     }
 
 
-    public deletemodelPermissions(p: ModelPermissionDto) {
-        this.item.modelPermissions.forEach((element, index) => {
-            if (element === p) { this.item.modelPermissions.splice(index, 1); }
+    public deletemodelPermissionUtilisateurs(p: ModelPermissionUtilisateurDto) {
+        this.item.modelPermissionUtilisateurs.forEach((element, index) => {
+            if (element === p) { this.item.modelPermissionUtilisateurs.splice(index, 1); }
         });
     }
 
-    public editmodelPermissions(p: ModelPermissionDto) {
-        this.modelPermissionsElement = {... p};
+    public editmodelPermissionUtilisateurs(p: ModelPermissionUtilisateurDto) {
+        this.modelPermissionUtilisateursElement = {... p};
         this.activeTab = 0;
     }
 
@@ -87,15 +90,18 @@ export class UtilisateurCreateAdminComponent extends AbstractCreateController<Ut
     }
 
 
-    public validateModelPermissionsReference(){
-        if (this.modelPermissionsElement.reference == null) {
-            this.errorMessages.push('Reference de la modelPermission est  invalide');
-            this.validModelPermissionsReference = false;
-        } else {
-            this.validModelPermissionsReference = true;
-        }
-    }
 
+    public async openCreateModelPermission(modelPermission: string) {
+    const isPermistted = await this.roleService.isPermitted('ModelPermission', 'add');
+    if(isPermistted) {
+         this.modelPermission = new ModelPermissionDto();
+         this.createModelPermissionDialog = true;
+    }else{
+        this.messageService.add({
+        severity: 'error', summary: 'erreur', detail: 'problème de permission'
+        });
+     }
+    }
     public async openCreateDroit(droit: string) {
     const isPermistted = await this.roleService.isPermitted('Droit', 'add');
     if(isPermistted) {
@@ -107,7 +113,36 @@ export class UtilisateurCreateAdminComponent extends AbstractCreateController<Ut
         });
      }
     }
+    public async openCreateActionPermission(actionPermission: string) {
+    const isPermistted = await this.roleService.isPermitted('ActionPermission', 'add');
+    if(isPermistted) {
+         this.actionPermission = new ActionPermissionDto();
+         this.createActionPermissionDialog = true;
+    }else{
+        this.messageService.add({
+        severity: 'error', summary: 'erreur', detail: 'problème de permission'
+        });
+     }
+    }
 
+    get modelPermission(): ModelPermissionDto {
+        return this.modelPermissionService.item;
+    }
+    set modelPermission(value: ModelPermissionDto) {
+        this.modelPermissionService.item = value;
+    }
+    get modelPermissions(): Array<ModelPermissionDto> {
+        return this.modelPermissionService.items;
+    }
+    set modelPermissions(value: Array<ModelPermissionDto>) {
+        this.modelPermissionService.items = value;
+    }
+    get createModelPermissionDialog(): boolean {
+       return this.modelPermissionService.createDialog;
+    }
+    set createModelPermissionDialog(value: boolean) {
+        this.modelPermissionService.createDialog= value;
+    }
     get droit(): DroitDto {
         return this.droitService.item;
     }
@@ -126,6 +161,24 @@ export class UtilisateurCreateAdminComponent extends AbstractCreateController<Ut
     set createDroitDialog(value: boolean) {
         this.droitService.createDialog= value;
     }
+    get actionPermission(): ActionPermissionDto {
+        return this.actionPermissionService.item;
+    }
+    set actionPermission(value: ActionPermissionDto) {
+        this.actionPermissionService.item = value;
+    }
+    get actionPermissions(): Array<ActionPermissionDto> {
+        return this.actionPermissionService.items;
+    }
+    set actionPermissions(value: Array<ActionPermissionDto>) {
+        this.actionPermissionService.items = value;
+    }
+    get createActionPermissionDialog(): boolean {
+       return this.actionPermissionService.createDialog;
+    }
+    set createActionPermissionDialog(value: boolean) {
+        this.actionPermissionService.createDialog= value;
+    }
 
     get droitUtilisateurs(): Array<DroitUtilisateurDto> {
         if( this._droitUtilisateurs == null )
@@ -139,21 +192,15 @@ export class UtilisateurCreateAdminComponent extends AbstractCreateController<Ut
 
 
 
-    get validModelPermissionsReference(): boolean {
-        return this._validModelPermissionsReference;
-    }
-    set validModelPermissionsReference(value: boolean) {
-        this._validModelPermissionsReference = value;
+
+    get modelPermissionUtilisateursElement(): ModelPermissionUtilisateurDto {
+        if( this._modelPermissionUtilisateursElement == null )
+            this._modelPermissionUtilisateursElement = new ModelPermissionUtilisateurDto();
+        return this._modelPermissionUtilisateursElement;
     }
 
-    get modelPermissionsElement(): ModelPermissionDto {
-        if( this._modelPermissionsElement == null )
-            this._modelPermissionsElement = new ModelPermissionDto();
-        return this._modelPermissionsElement;
-    }
-
-    set modelPermissionsElement(value: ModelPermissionDto) {
-        this._modelPermissionsElement = value;
+    set modelPermissionUtilisateursElement(value: ModelPermissionUtilisateurDto) {
+        this._modelPermissionUtilisateursElement = value;
     }
     get droitUtilisateursElement(): DroitUtilisateurDto {
         if( this._droitUtilisateursElement == null )

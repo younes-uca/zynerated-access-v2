@@ -1,6 +1,5 @@
 import {BaseDto} from 'src/app/zynerator/dto/BaseDto.model';
 
-import {PermissionDto} from './Permission.model';
 
 export class ModelPermissionDto extends BaseDto{
 
@@ -8,7 +7,6 @@ export class ModelPermissionDto extends BaseDto{
 
     public libelle: string;
 
-     public permissions: Array<PermissionDto>;
     
 
     constructor() {
@@ -16,7 +14,6 @@ export class ModelPermissionDto extends BaseDto{
 
         this.reference = '';
         this.libelle = '';
-        this.permissions = new Array<PermissionDto>();
 
         }
 

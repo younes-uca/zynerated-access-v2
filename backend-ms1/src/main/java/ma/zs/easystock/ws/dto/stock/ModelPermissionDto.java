@@ -4,7 +4,6 @@ import ma.zs.easystock.zynerator.audit.Log;
 import ma.zs.easystock.zynerator.dto.AuditBaseDto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-import java.util.List;
 
 
 
@@ -16,7 +15,6 @@ public class ModelPermissionDto  extends AuditBaseDto {
     private String libelle  ;
 
 
-    private List<PermissionDto> permissions ;
 
 
     public ModelPermissionDto(){
@@ -45,13 +43,6 @@ public class ModelPermissionDto  extends AuditBaseDto {
 
 
 
-    public List<PermissionDto> getPermissions(){
-        return this.permissions;
-    }
-
-    public void setPermissions(List<PermissionDto> permissions){
-        this.permissions = permissions;
-    }
 
 
 

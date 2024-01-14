@@ -126,45 +126,76 @@
                                 </div>
                             </p-tabPanel>
 
-                            <p-tabPanel header="{{'utilisateur.modelPermissions' | translate}}">
+                            <p-tabPanel header="{{'utilisateur.modelPermissionUtilisateurs' | translate}}">
                                         <div class="grid">
                                             <div class="col">
-                                                            <div class="field col-12 md:col-6">
-                                                                <label for="1">Reference<span style="color: red;">*</span></label>
-                                                                <input appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="Reference"
-                                                                       id="1" [(ngModel)]="modelPermissionsElement.reference"
-                                                                       autofocus  [ngClass]="{'ng-invalid ng-dirty' : !validModelPermissionsReference}"  >
-                                                                <small class='p-error' *ngIf='!validModelPermissionsReference'>Reference est obligatoire.</small>
+                                                            <div class="field col-11 md:col-5">
+                                                                <label>Action permission</label>
+                                                                <p-dropdown appendTo="body" [options]="actionPermissions" [(ngModel)]="modelPermissionUtilisateursElement.actionPermission"
+                                                                        id="1"  [filter]="true" filterMatchMode="contains" [showClear]="true"
+                                                                        optionLabel="reference" placeholder="Action permission"  >
+                                                                </p-dropdown>
+                                                                
+                                                            </div>
+                                                            <div class="col-1">
+                                                                <label></label>
+                                                                <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateActionPermission('ActionPermission')"  class="p-button-success one-colonne-btn-success-align"></button>
+                                                            </div>
+                                                            <div class="field col-11 md:col-5">
+                                                                <label>Model permission</label>
+                                                                <p-dropdown appendTo="body" [options]="modelPermissions" [(ngModel)]="modelPermissionUtilisateursElement.modelPermission"
+                                                                        id="2"  [filter]="true" filterMatchMode="contains" [showClear]="true"
+                                                                        optionLabel="reference" placeholder="Model permission"  >
+                                                                </p-dropdown>
+                                                                
+                                                            </div>
+                                                            <div class="col-1">
+                                                                <label></label>
+                                                                <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateModelPermission('ModelPermission')"  class="p-button-success one-colonne-btn-success-align"></button>
+                                                            </div>
+                                                            <div class="field  align-inputswitch col-12 md:col-6">
+                                                                <div  class="label-inputswitch">
+                                                                    <label for="3">Value</label>
+                                                                </div>
+                                                                <div class="input-switch">
+                                                                    <p-inputSwitch  appendTo="body" id="3"  [(ngModel)]="modelPermissionUtilisateursElement.value"></p-inputSwitch>
+                                                                </div>
                                                             </div>
                                                             <div class="field col-12 md:col-6">
-                                                                <label for="2">Libelle</label>
-                                                                <input appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="Libelle"
-                                                                       id="2" [(ngModel)]="modelPermissionsElement.libelle"
+                                                                <label for="5">Sub attribute</label>
+                                                                <input appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="Sub attribute"
+                                                                       id="5" [(ngModel)]="modelPermissionUtilisateursElement.subAttribute"
                                                                        autofocus   >
                                                                 
                                                             </div>
                                                 <div class="field col-12 md:col-1">
-                                                    <button pButton pRipple type="button" icon="pi pi-plus" class="mt-4" label="OK" (click)="addModelPermissions()"></button>
+                                                    <button pButton pRipple type="button" icon="pi pi-plus" class="mt-4" label="OK" (click)="addModelPermissionUtilisateurs()"></button>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="card">
-                                                <p-table [value]="item.modelPermissions" [scrollable]="true" scrollHeight="200px">
+                                                <p-table [value]="item.modelPermissionUtilisateurs" [scrollable]="true" scrollHeight="200px">
                                                     <ng-template pTemplate="header">
                                                         <tr>
-                                                                        <th>Reference</th>
-                                                                        <th>Libelle</th>
+                                                                        <th>Action permission</th>
+                                                                        <th>Model permission</th>
+                                                                        <th>Value</th>
+                                                                        <th>Sub attribute</th>
                                                             <th>Actions</th>
                                                         </tr>
                                                     </ng-template>
                                                     <ng-template pTemplate="body" let-p>
                                                         <tr>
-                                                                        <td>{{p.reference}}</td>
-                                                                        <td>{{p.libelle}}</td>
+                                                                    <td>{{p.actionPermission?.reference}}</td>
+                                                                    <td>{{p.modelPermission?.reference}}</td>
+                                                                        <td><i *ngIf="p.value" class="pi pi-check checked-toogle"></i>
+                                                                            <i *ngIf="!p.value" class="pi pi-times unchecked-toogle"></i>
+                                                                        </td>
+                                                                        <td>{{p.subAttribute}}</td>
                                                             <td>
-                                                                <button (click)="deleteModelPermissions(p)" pButton type="button" icon="pi pi-times"  class="p-button-rounded p-button-danger"></button>
-                                                                <button (click)="editModelPermissions(p)" pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"></button>
+                                                                <button (click)="deleteModelPermissionUtilisateurs(p)" pButton type="button" icon="pi pi-times"  class="p-button-rounded p-button-danger"></button>
+                                                                <button (click)="editModelPermissionUtilisateurs(p)" pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"></button>
                                                             </td>
                                                         </tr>
                                                     </ng-template>
@@ -187,6 +218,8 @@
             </ng-template>
 
 
+                            <app-action-permission-create-admin></app-action-permission-create-admin>
+                            <app-model-permission-create-admin></app-model-permission-create-admin>
                             <app-droit-create-admin></app-droit-create-admin>
 
     </p-dialog>

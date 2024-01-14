@@ -114,29 +114,6 @@
 
     </table>
     <br/><br/><br/><br/><br/>
-    <h1>Permissions</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Action permission</th>
-                <th>Sub attribute</th>
-                <th>Value</th>
-            </tr>
-        </thead>
-        <tbody>
-                #foreach( $item in $permissions )
-                #if( ($foreach.index % 2) == 0 )
-                <tr style="background-color: #f4f5f6">
-                    #else
-                <tr style="background-color: #e9ebec">
-                    #end
-                    <td>#displayDataIfNotNull($item.actionPermission,$item.actionPermission.reference)</td>
-                    <td>#displayDataIfNotNull($item.subAttribute)</td>
-                    <td>#displayDataIfNotNull($item.value)</td>
-                </tr>
-                #end
-        </tbody>
-    </table>
     <br/><br/>
 
     <div class="footer">

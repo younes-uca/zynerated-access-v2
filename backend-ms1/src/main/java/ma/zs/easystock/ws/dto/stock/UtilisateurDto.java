@@ -22,7 +22,7 @@ public class UtilisateurDto  extends AuditBaseDto {
     private Boolean passwordChanged  ;
 
 
-    private List<ModelPermissionDto> modelPermissions ;
+    private List<ModelPermissionUtilisateurDto> modelPermissionUtilisateurs ;
     private List<DroitUtilisateurDto> droitUtilisateurs ;
 
 
@@ -100,12 +100,12 @@ public class UtilisateurDto  extends AuditBaseDto {
 
 
 
-    public List<ModelPermissionDto> getModelPermissions(){
-        return this.modelPermissions;
+    public List<ModelPermissionUtilisateurDto> getModelPermissionUtilisateurs(){
+        return this.modelPermissionUtilisateurs;
     }
 
-    public void setModelPermissions(List<ModelPermissionDto> modelPermissions){
-        this.modelPermissions = modelPermissions;
+    public void setModelPermissionUtilisateurs(List<ModelPermissionUtilisateurDto> modelPermissionUtilisateurs){
+        this.modelPermissionUtilisateurs = modelPermissionUtilisateurs;
     }
     public List<DroitUtilisateurDto> getDroitUtilisateurs(){
         return this.droitUtilisateurs;

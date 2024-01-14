@@ -1,13 +1,13 @@
-Feature: Permission
+Feature: ModelPermissionUtilisateur
 
   Background:
     * call read('karate-config.js')
     * call read('db_cleaner.js')
-    * url permissionUrl
+    * url modelPermissionUtilisateurUrl
     * header Content-Type = 'application/json'
 
-    * def postBody = read('PermissionSave.json')
-    * def FindAllSchema = read('PermissionSchema.json')
+    * def postBody = read('ModelPermissionUtilisateurSave.json')
+    * def FindAllSchema = read('ModelPermissionUtilisateurSchema.json')
 
   Scenario: Fail - GetByID Not Found
 
@@ -19,7 +19,7 @@ Feature: Permission
 
 
 
-  Scenario: Fail - POST Permission without Body
+  Scenario: Fail - POST ModelPermissionUtilisateur without Body
 
     * path ''
     * header Authorization = 'Bearer ' + adminToken
@@ -29,7 +29,7 @@ Feature: Permission
 
 
 
-  Scenario: Fail - POST Permission without Authorization
+  Scenario: Fail - POST ModelPermissionUtilisateur without Authorization
 
     * path ''
     * header Authorization = 'Bearer unvalid'
@@ -39,7 +39,7 @@ Feature: Permission
 
 
 
-  Scenario: Fail - Save Permission with method PATCH
+  Scenario: Fail - Save ModelPermissionUtilisateur with method PATCH
 
     * path ''
     * header Authorization = 'Bearer ' + adminToken

@@ -18,10 +18,10 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import ma.zs.easystock.service.facade.admin.stock.UtilisateurAdminService ;
-import ma.zs.easystock.bean.core.stock.Utilisateur ;
 import ma.zs.easystock.service.facade.admin.stock.DroitAdminService ;
 import ma.zs.easystock.bean.core.stock.Droit ;
+import ma.zs.easystock.service.facade.admin.stock.UtilisateurAdminService ;
+import ma.zs.easystock.bean.core.stock.Utilisateur ;
 
 import java.util.List;
 @Service
@@ -62,9 +62,9 @@ public class DroitUtilisateurAdminServiceImpl extends AbstractServiceImpl<DroitU
 
 
     @Autowired
-    private UtilisateurAdminService utilisateurService ;
-    @Autowired
     private DroitAdminService droitService ;
+    @Autowired
+    private UtilisateurAdminService utilisateurService ;
 
     public DroitUtilisateurAdminServiceImpl(DroitUtilisateurDao dao) {
         super(dao);

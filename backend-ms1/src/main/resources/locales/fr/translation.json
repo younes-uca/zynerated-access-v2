@@ -17,51 +17,6 @@
     "list": "Liste",
 
 
-    "droitUtilisateur":{
-        "droit": "Droit",
-        "droitPlaceHolder": "Select a Droit",
-        "droitPlaceHolderFilter": "Search by Droit",
-        "utilisateur": "Utilisateur",
-        "utilisateurPlaceHolder": "Select a Utilisateur",
-        "utilisateurPlaceHolderFilter": "Search by Utilisateur",
-        "droitUtilisateur": "Droit utilisateur",
-        "tabPan": "Droit utilisateur",
-        "header": "Liste des droit utilisateurs",
-        "deleteDroitUtilisateurConfirmationMessage": "Voulez vous vraiment supprimer droit utilisateur",
-        "deleteDroitUtilisateursConfirmationMessage": "Voulez vous vraiment supprimer les elments selectionnes"
-
-    },
-
-
-    "permission":{
-        "actionPermission": "Action permission",
-        "actionPermissionPlaceHolder": "Select a Action permission",
-        "actionPermissionPlaceHolderFilter": "Search by Action permission",
-        "modelPermission": "Model permission",
-        "modelPermissionPlaceHolder": "Select a Model permission",
-        "modelPermissionPlaceHolderFilter": "Search by Model permission",
-        "subAttribute": "Sub attribute",
-        "value": "Value",
-        "permission": "Permission",
-        "tabPan": "Permission",
-        "header": "Liste des permissions",
-        "deletePermissionConfirmationMessage": "Voulez vous vraiment supprimer permission",
-        "deletePermissionsConfirmationMessage": "Voulez vous vraiment supprimer les elments selectionnes"
-
-    },
-
-
-    "droit":{
-        "authority": "Authority",
-        "droit": "Droit",
-        "tabPan": "Droit",
-        "header": "Liste des droits",
-        "deleteDroitConfirmationMessage": "Voulez vous vraiment supprimer droit",
-        "deleteDroitsConfirmationMessage": "Voulez vous vraiment supprimer les elments selectionnes"
-
-    },
-
-
     "actionPermission":{
         "reference": "Reference",
         "libelle": "Libelle",
@@ -70,6 +25,27 @@
         "header": "Liste des action permissions",
         "deleteActionPermissionConfirmationMessage": "Voulez vous vraiment supprimer action permission",
         "deleteActionPermissionsConfirmationMessage": "Voulez vous vraiment supprimer les elments selectionnes"
+
+    },
+
+
+    "modelPermissionUtilisateur":{
+        "actionPermission": "Action permission",
+        "actionPermissionPlaceHolder": "Select a Action permission",
+        "actionPermissionPlaceHolderFilter": "Search by Action permission",
+        "modelPermission": "Model permission",
+        "modelPermissionPlaceHolder": "Select a Model permission",
+        "modelPermissionPlaceHolderFilter": "Search by Model permission",
+        "value": "Value",
+        "utilisateur": "Utilisateur",
+        "utilisateurPlaceHolder": "Select a Utilisateur",
+        "utilisateurPlaceHolderFilter": "Search by Utilisateur",
+        "subAttribute": "Sub attribute",
+        "modelPermissionUtilisateur": "Model permission utilisateur",
+        "tabPan": "Model permission utilisateur",
+        "header": "Liste des model permission utilisateurs",
+        "deleteModelPermissionUtilisateurConfirmationMessage": "Voulez vous vraiment supprimer model permission utilisateur",
+        "deleteModelPermissionUtilisateursConfirmationMessage": "Voulez vous vraiment supprimer les elments selectionnes"
 
     },
 
@@ -133,19 +109,6 @@
     },
 
 
-    "modelPermission":{
-        "reference": "Reference",
-        "libelle": "Libelle",
-        "permissions": "Permissions",
-        "modelPermission": "Model permission",
-        "tabPan": "Model permission",
-        "header": "Liste des model permissions",
-        "deleteModelPermissionConfirmationMessage": "Voulez vous vraiment supprimer model permission",
-        "deleteModelPermissionsConfirmationMessage": "Voulez vous vraiment supprimer les elments selectionnes"
-
-    },
-
-
     "achat":{
         "reference": "Reference",
         "dateAchat": "Date achat",
@@ -172,6 +135,17 @@
     },
 
 
+    "droit":{
+        "authority": "Authority",
+        "droit": "Droit",
+        "tabPan": "Droit",
+        "header": "Liste des droits",
+        "deleteDroitConfirmationMessage": "Voulez vous vraiment supprimer droit",
+        "deleteDroitsConfirmationMessage": "Voulez vous vraiment supprimer les elments selectionnes"
+
+    },
+
+
     "client":{
         "cin": "Cin",
         "nom": "Nom",
@@ -187,6 +161,55 @@
         "header": "Liste des clients",
         "deleteClientConfirmationMessage": "Voulez vous vraiment supprimer client",
         "deleteClientsConfirmationMessage": "Voulez vous vraiment supprimer les elments selectionnes"
+
+    },
+
+
+    "droitUtilisateur":{
+        "droit": "Droit",
+        "droitPlaceHolder": "Select a Droit",
+        "droitPlaceHolderFilter": "Search by Droit",
+        "utilisateur": "Utilisateur",
+        "utilisateurPlaceHolder": "Select a Utilisateur",
+        "utilisateurPlaceHolderFilter": "Search by Utilisateur",
+        "droitUtilisateur": "Droit utilisateur",
+        "tabPan": "Droit utilisateur",
+        "header": "Liste des droit utilisateurs",
+        "deleteDroitUtilisateurConfirmationMessage": "Voulez vous vraiment supprimer droit utilisateur",
+        "deleteDroitUtilisateursConfirmationMessage": "Voulez vous vraiment supprimer les elments selectionnes"
+
+    },
+
+
+    "utilisateur":{
+        "credentialsNonExpired": "Credentials non expired",
+        "enabled": "Enabled",
+        "email": "Email",
+        "accountNonExpired": "Account non expired",
+        "accountNonLocked": "Account non locked",
+        "username": "Username",
+        "password": "Password",
+        "passwordChanged": "Password changed",
+        "modelPermissionUtilisateurs": "Model permission utilisateurs",
+        "droitUtilisateurs": "Droit utilisateurs",
+        "droitUtilisateursPlaceHolder": "Select multiple Droits",
+        "utilisateur": "Utilisateur",
+        "tabPan": "Utilisateur",
+        "header": "Liste des utilisateurs",
+        "deleteUtilisateurConfirmationMessage": "Voulez vous vraiment supprimer utilisateur",
+        "deleteUtilisateursConfirmationMessage": "Voulez vous vraiment supprimer les elments selectionnes"
+
+    },
+
+
+    "modelPermission":{
+        "reference": "Reference",
+        "libelle": "Libelle",
+        "modelPermission": "Model permission",
+        "tabPan": "Model permission",
+        "header": "Liste des model permissions",
+        "deleteModelPermissionConfirmationMessage": "Voulez vous vraiment supprimer model permission",
+        "deleteModelPermissionsConfirmationMessage": "Voulez vous vraiment supprimer les elments selectionnes"
 
     },
 
@@ -218,27 +241,6 @@
         "header": "Liste des achat items",
         "deleteAchatItemConfirmationMessage": "Voulez vous vraiment supprimer achat item",
         "deleteAchatItemsConfirmationMessage": "Voulez vous vraiment supprimer les elments selectionnes"
-
-    },
-
-
-    "utilisateur":{
-        "credentialsNonExpired": "Credentials non expired",
-        "enabled": "Enabled",
-        "email": "Email",
-        "accountNonExpired": "Account non expired",
-        "accountNonLocked": "Account non locked",
-        "username": "Username",
-        "password": "Password",
-        "passwordChanged": "Password changed",
-        "modelPermissions": "Model permissions",
-        "droitUtilisateurs": "Droit utilisateurs",
-        "droitUtilisateursPlaceHolder": "Select multiple Droits",
-        "utilisateur": "Utilisateur",
-        "tabPan": "Utilisateur",
-        "header": "Liste des utilisateurs",
-        "deleteUtilisateurConfirmationMessage": "Voulez vous vraiment supprimer utilisateur",
-        "deleteUtilisateursConfirmationMessage": "Voulez vous vraiment supprimer les elments selectionnes"
 
     },
 

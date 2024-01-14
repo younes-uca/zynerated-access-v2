@@ -1,6 +1,6 @@
 import {BaseCriteria} from 'src/app/zynerator/criteria/BaseCriteria.model';
 import {DroitUtilisateurCriteria} from './DroitUtilisateurCriteria.model';
-import {ModelPermissionCriteria} from './ModelPermissionCriteria.model';
+import {ModelPermissionUtilisateurCriteria} from './ModelPermissionUtilisateurCriteria.model';
 
 export class UtilisateurCriteria  extends BaseCriteria  {
 
@@ -16,7 +16,7 @@ export class UtilisateurCriteria  extends BaseCriteria  {
     public password: string;
     public passwordLike: string;
     public passwordChanged: null | boolean;
-      public modelPermissions: Array<ModelPermissionCriteria>;
+      public modelPermissionUtilisateurs: Array<ModelPermissionUtilisateurCriteria>;
       public droitUtilisateurs: Array<DroitUtilisateurCriteria>;
 
 }
