@@ -1,0 +1,248 @@
+{
+    "from-to": "Elements from {first} to {last} (total {totalRecords})",
+    "new" : "Nouveau",
+    "search": "Chercher",
+    "export": "Exporter",
+    "validate": "Validater",
+    "search": "Chercher...",
+    "delete": "Supprimer",
+    "cancel": "Annuler",
+    "save": "Sauvgarder",
+    "next": "Suivant",
+    "yes": "Oui",
+    "no": "Non",
+    "actions": "Actions",
+    "confirm": "Confirmer",
+    "creation": "Creation",
+    "list": "Liste",
+
+
+    "droitUtilisateur":{
+        "droit": "Droit",
+        "droitPlaceHolder": "Select a Droit",
+        "droitPlaceHolderFilter": "Search by Droit",
+        "utilisateur": "Utilisateur",
+        "utilisateurPlaceHolder": "Select a Utilisateur",
+        "utilisateurPlaceHolderFilter": "Search by Utilisateur",
+        "droitUtilisateur": "Droit utilisateur",
+        "tabPan": "Droit utilisateur",
+        "header": "Liste des droit utilisateurs",
+        "deleteDroitUtilisateurConfirmationMessage": "Voulez vous vraiment supprimer droit utilisateur",
+        "deleteDroitUtilisateursConfirmationMessage": "Voulez vous vraiment supprimer les elments selectionnes"
+
+    },
+
+
+    "permission":{
+        "actionPermission": "Action permission",
+        "actionPermissionPlaceHolder": "Select a Action permission",
+        "actionPermissionPlaceHolderFilter": "Search by Action permission",
+        "modelPermission": "Model permission",
+        "modelPermissionPlaceHolder": "Select a Model permission",
+        "modelPermissionPlaceHolderFilter": "Search by Model permission",
+        "subAttribute": "Sub attribute",
+        "value": "Value",
+        "permission": "Permission",
+        "tabPan": "Permission",
+        "header": "Liste des permissions",
+        "deletePermissionConfirmationMessage": "Voulez vous vraiment supprimer permission",
+        "deletePermissionsConfirmationMessage": "Voulez vous vraiment supprimer les elments selectionnes"
+
+    },
+
+
+    "droit":{
+        "authority": "Authority",
+        "droit": "Droit",
+        "tabPan": "Droit",
+        "header": "Liste des droits",
+        "deleteDroitConfirmationMessage": "Voulez vous vraiment supprimer droit",
+        "deleteDroitsConfirmationMessage": "Voulez vous vraiment supprimer les elments selectionnes"
+
+    },
+
+
+    "actionPermission":{
+        "reference": "Reference",
+        "libelle": "Libelle",
+        "actionPermission": "Action permission",
+        "tabPan": "Action permission",
+        "header": "Liste des action permissions",
+        "deleteActionPermissionConfirmationMessage": "Voulez vous vraiment supprimer action permission",
+        "deleteActionPermissionsConfirmationMessage": "Voulez vous vraiment supprimer les elments selectionnes"
+
+    },
+
+
+    "paiementAchat":{
+        "reference": "Reference",
+        "datePaiement": "Date paiement",
+        "datePaiementMin": "Date paiement Min",
+        "datePaiementMax": "Date paiement Max",
+        "montant": "Montant",
+        "montantMin": "Montant Min",
+        "montantMax": "Montant Max",
+        "achat": "Achat",
+        "achatPlaceHolder": "Select a Achat",
+        "achatPlaceHolderFilter": "Search by Achat",
+        "description": "Description",
+        "paiementAchat": "Paiement achat",
+        "tabPan": "Paiement achat",
+        "header": "Liste des paiement achats",
+        "deletePaiementAchatConfirmationMessage": "Voulez vous vraiment supprimer paiement achat",
+        "deletePaiementAchatsConfirmationMessage": "Voulez vous vraiment supprimer les elments selectionnes"
+
+    },
+
+
+    "categorieProduit":{
+        "reference": "Reference",
+        "libelle": "Libelle",
+        "categorieProduit": "Categorie produit",
+        "tabPan": "Categorie produit",
+        "header": "Liste des categorie produits",
+        "deleteCategorieProduitConfirmationMessage": "Voulez vous vraiment supprimer categorie produit",
+        "deleteCategorieProduitsConfirmationMessage": "Voulez vous vraiment supprimer les elments selectionnes"
+
+    },
+
+
+    "produit":{
+        "reference": "Reference",
+        "libelle": "Libelle",
+        "barcode": "Barcode",
+        "discription": "Discription",
+        "prixAchatMoyen": "Prix achat moyen",
+        "prixAchatMoyenMin": "Prix achat moyen Min",
+        "prixAchatMoyenMax": "Prix achat moyen Max",
+        "quantite": "Quantite",
+        "quantiteMin": "Quantite Min",
+        "quantiteMax": "Quantite Max",
+        "seuilAlert": "Seuil alert",
+        "seuilAlertMin": "Seuil alert Min",
+        "seuilAlertMax": "Seuil alert Max",
+        "categorieProduit": "Categorie produit",
+        "categorieProduitPlaceHolder": "Select a Categorie produit",
+        "categorieProduitPlaceHolderFilter": "Search by Categorie produit",
+        "produit": "Produit",
+        "tabPan": "Produit",
+        "header": "Liste des produits",
+        "deleteProduitConfirmationMessage": "Voulez vous vraiment supprimer produit",
+        "deleteProduitsConfirmationMessage": "Voulez vous vraiment supprimer les elments selectionnes"
+
+    },
+
+
+    "modelPermission":{
+        "reference": "Reference",
+        "libelle": "Libelle",
+        "permissions": "Permissions",
+        "modelPermission": "Model permission",
+        "tabPan": "Model permission",
+        "header": "Liste des model permissions",
+        "deleteModelPermissionConfirmationMessage": "Voulez vous vraiment supprimer model permission",
+        "deleteModelPermissionsConfirmationMessage": "Voulez vous vraiment supprimer les elments selectionnes"
+
+    },
+
+
+    "achat":{
+        "reference": "Reference",
+        "dateAchat": "Date achat",
+        "dateAchatMin": "Date achat Min",
+        "dateAchatMax": "Date achat Max",
+        "total": "Total",
+        "totalMin": "Total Min",
+        "totalMax": "Total Max",
+        "totalPaye": "Total paye",
+        "totalPayeMin": "Total paye Min",
+        "totalPayeMax": "Total paye Max",
+        "description": "Description",
+        "client": "Client",
+        "clientPlaceHolder": "Select a Client",
+        "clientPlaceHolderFilter": "Search by Client",
+        "paiementAchats": "Paiement achats",
+        "achatItems": "Achat items",
+        "achat": "Achat",
+        "tabPan": "Achat",
+        "header": "Liste des achats",
+        "deleteAchatConfirmationMessage": "Voulez vous vraiment supprimer achat",
+        "deleteAchatsConfirmationMessage": "Voulez vous vraiment supprimer les elments selectionnes"
+
+    },
+
+
+    "client":{
+        "cin": "Cin",
+        "nom": "Nom",
+        "tel": "Tel",
+        "email": "Email",
+        "adresse": "Adresse",
+        "description": "Description",
+        "creance": "Creance",
+        "creanceMin": "Creance Min",
+        "creanceMax": "Creance Max",
+        "client": "Client",
+        "tabPan": "Client",
+        "header": "Liste des clients",
+        "deleteClientConfirmationMessage": "Voulez vous vraiment supprimer client",
+        "deleteClientsConfirmationMessage": "Voulez vous vraiment supprimer les elments selectionnes"
+
+    },
+
+
+    "achatItem":{
+        "produit": "Produit",
+        "produitPlaceHolder": "Select a Produit",
+        "produitPlaceHolderFilter": "Search by Produit",
+        "prixUnitaire": "Prix unitaire",
+        "prixUnitaireMin": "Prix unitaire Min",
+        "prixUnitaireMax": "Prix unitaire Max",
+        "prixVente": "Prix vente",
+        "prixVenteMin": "Prix vente Min",
+        "prixVenteMax": "Prix vente Max",
+        "quantite": "Quantite",
+        "quantiteMin": "Quantite Min",
+        "quantiteMax": "Quantite Max",
+        "quantiteAvoir": "Quantite avoir",
+        "quantiteAvoirMin": "Quantite avoir Min",
+        "quantiteAvoirMax": "Quantite avoir Max",
+        "remise": "Remise",
+        "remiseMin": "Remise Min",
+        "remiseMax": "Remise Max",
+        "achat": "Achat",
+        "achatPlaceHolder": "Select a Achat",
+        "achatPlaceHolderFilter": "Search by Achat",
+        "achatItem": "Achat item",
+        "tabPan": "Achat item",
+        "header": "Liste des achat items",
+        "deleteAchatItemConfirmationMessage": "Voulez vous vraiment supprimer achat item",
+        "deleteAchatItemsConfirmationMessage": "Voulez vous vraiment supprimer les elments selectionnes"
+
+    },
+
+
+    "utilisateur":{
+        "credentialsNonExpired": "Credentials non expired",
+        "enabled": "Enabled",
+        "email": "Email",
+        "accountNonExpired": "Account non expired",
+        "accountNonLocked": "Account non locked",
+        "username": "Username",
+        "password": "Password",
+        "passwordChanged": "Password changed",
+        "modelPermissions": "Model permissions",
+        "droitUtilisateurs": "Droit utilisateurs",
+        "droitUtilisateursPlaceHolder": "Select multiple Droits",
+        "utilisateur": "Utilisateur",
+        "tabPan": "Utilisateur",
+        "header": "Liste des utilisateurs",
+        "deleteUtilisateurConfirmationMessage": "Voulez vous vraiment supprimer utilisateur",
+        "deleteUtilisateursConfirmationMessage": "Voulez vous vraiment supprimer les elments selectionnes"
+
+    },
+
+"appName": "GED"
+}
+
+
