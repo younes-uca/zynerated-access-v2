@@ -29,8 +29,29 @@ export abstract class AbstractService<DTO extends BaseDto, CRITERIA extends Base
     protected _steps: MenuItem[];
     protected _fileTempDtosForOne: FileTempDto[];
     protected _fileTempDtos: Array<FileTempDto[]>;
+    private _createAction = 'create';
+    private _listAction = 'list';
+    private _editAction = 'edit';
+    private _deleteAction = 'delete';
+    private _viewAction = 'view';
+    private _duplicateAction = 'duplicate';
+    protected modeleName = '';
+    private _createActionIsValid = false;
+    private _editActionIsValid = false;
+    private _listActionIsValid = false;
+    private _deleteActionIsValid = false;
+    private _viewActionIsValid = false;
+    private _duplicateActionIsValid = false;
+
+    protected API_PERMISSION = environment.apiUrl + 'admin/modelPermissionUser/';
 
 
+
+    public hasActionPermission(username: string, actionReference: string): Observable<boolean>{
+        // tslint:disable-next-line:max-line-length
+        return  this.httpClient.get<boolean>(this.API_PERMISSION + 'user/' + username + '/model/' + this.getModelName(this.modeleName) + '/action/' + actionReference) ;
+    }
+    public abstract getModelName(modeleName: string): string;
     public findSchedule(startTime: string, endTime: string): Observable<Array<ScheduleDto>> {
         return this.httpClient.get<Array<ScheduleDto>>( this.API +  'start/' + startTime + '/end/' + endTime);
     }
@@ -277,5 +298,102 @@ export abstract class AbstractService<DTO extends BaseDto, CRITERIA extends Base
 
     set fileTempDtosForOne(value: FileTempDto[]) {
         this._fileTempDtosForOne = value;
+    }
+
+    get createAction(): string {
+        return this._createAction;
+    }
+
+    set createAction(value: string) {
+        this._createAction = value;
+    }
+
+    get listAction(): string {
+        return this._listAction;
+    }
+
+    set listAction(value: string) {
+        this._listAction = value;
+    }
+
+    get editAction(): string {
+        return this._editAction;
+    }
+
+    set editAction(value: string) {
+        this._editAction = value;
+    }
+
+    get deleteAction(): string {
+        return this._deleteAction;
+    }
+
+    set deleteAction(value: string) {
+        this._deleteAction = value;
+    }
+
+    get createActionIsValid(): boolean {
+        return this._createActionIsValid;
+    }
+
+    set createActionIsValid(value: boolean) {
+        this._createActionIsValid = value;
+    }
+
+
+    get editActionIsValid(): boolean {
+        return this._editActionIsValid;
+    }
+
+    set editActionIsValid(value: boolean) {
+        this._editActionIsValid = value;
+    }
+
+    get listActionIsValid(): boolean {
+        return this._listActionIsValid;
+    }
+
+    set listActionIsValid(value: boolean) {
+        this._listActionIsValid = value;
+    }
+
+    get deleteActionIsValid(): boolean {
+        return this._deleteActionIsValid;
+    }
+
+    set deleteActionIsValid(value: boolean) {
+        this._deleteActionIsValid = value;
+    }
+
+    get viewAction(): string {
+        return this._viewAction;
+    }
+
+    set viewAction(value: string) {
+        this._viewAction = value;
+    }
+
+    get duplicateAction(): string {
+        return this._duplicateAction;
+    }
+
+    set duplicateAction(value: string) {
+        this._duplicateAction = value;
+    }
+
+    get viewActionIsValid(): boolean {
+        return this._viewActionIsValid;
+    }
+
+    set viewActionIsValid(value: boolean) {
+        this._viewActionIsValid = value;
+    }
+
+    get duplicateActionIsValid(): boolean {
+        return this._duplicateActionIsValid;
+    }
+
+    set duplicateActionIsValid(value: boolean) {
+        this._duplicateActionIsValid = value;
     }
 }

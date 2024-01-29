@@ -8,7 +8,7 @@ export class TokenService {
     constructor() {
     }
 
-    public saveToken(token: string,) {
+    public saveToken(token: string) {
         localStorage.setItem('token', token);
     }
 
@@ -22,7 +22,7 @@ export class TokenService {
     }
 
     public token() {
-        return localStorage.getItem('token')
+        return localStorage.getItem('token');
     }
 
     public getUsername(): string {

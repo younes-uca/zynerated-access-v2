@@ -1,16 +1,17 @@
-import {ConfirmationService, MessageService,MenuItem} from 'primeng/api';
+import {ConfirmationService, MessageService, MenuItem} from 'primeng/api';
 import {DatePipe} from '@angular/common';
 import {Router} from '@angular/router';
 import {Inject, Injectable, PLATFORM_ID} from '@angular/core';
 import {environment} from 'src/environments/environment';
 
-import {RoleService} from 'src/app/zynerator/security/Role.service';
 import {AbstractService} from 'src/app/zynerator/service/AbstractService';
 import {BaseDto} from 'src/app/zynerator/dto/BaseDto.model';
 import {BaseCriteria} from 'src/app/zynerator/criteria/BaseCriteria.model';
 import {StringUtilService} from 'src/app/zynerator/util/StringUtil.service';
 import {FileTempDto} from 'src/app/zynerator/dto/FileTempDto.model';
 import {ServiceLocator} from 'src/app/zynerator/service/ServiceLocator';
+import {RoleAdminService} from '../../controller/service/admin/stock/RoleAdmin.service';
+
 @Injectable()
 export class AbstractCreateController<DTO extends BaseDto, CRITERIA extends BaseCriteria, SERVICE extends AbstractService<DTO, CRITERIA>> {
 
@@ -20,11 +21,10 @@ export class AbstractCreateController<DTO extends BaseDto, CRITERIA extends Base
     protected service: SERVICE;
     protected messageService: MessageService;
     protected confirmationService: ConfirmationService;
-    protected roleService: RoleService;
+    protected roleService: RoleAdminService;
     protected router: Router;
     protected stringUtilService: StringUtilService;
     protected _activeTab = 0;
-
 
 
     public constructor(service: SERVICE, @Inject(PLATFORM_ID) private platformId?) {
@@ -32,7 +32,7 @@ export class AbstractCreateController<DTO extends BaseDto, CRITERIA extends Base
         this.datePipe = ServiceLocator.injector.get(DatePipe);
         this.messageService = ServiceLocator.injector.get(MessageService);
         this.confirmationService = ServiceLocator.injector.get(ConfirmationService);
-        this.roleService = ServiceLocator.injector.get(RoleService);
+        this.roleService = ServiceLocator.injector.get(RoleAdminService);
         this.router = ServiceLocator.injector.get(Router);
         this.stringUtilService = ServiceLocator.injector.get(StringUtilService);
 
@@ -67,26 +67,29 @@ export class AbstractCreateController<DTO extends BaseDto, CRITERIA extends Base
             console.log(error);
         });
     }
-    public uploadOne(event, i: number): void{
+
+    public uploadOne(event, i: number): void {
         console.log(event.files[0]);
         let formData = new FormData();
-        formData.append('file',event.files[0]);
-        this.service.upload(formData,i);
+        formData.append('file', event.files[0]);
+        this.service.upload(formData, i);
     }
 
-    public uploadMultiple(event, i: number): void{
+    public uploadMultiple(event, i: number): void {
         console.log(event.files);
         const formData: FormData = new FormData();
         for (let i = 0; i < event.files.length; i++) {
             formData.append('files', event.files[i]);
         }
-        this.service.uploadMultiple(formData,i);
+        this.service.uploadMultiple(formData, i);
     }
+
     public validateForm(): void {
     }
 
     public setValidation(value: boolean) {
     }
+
     public performNext(): void {
         this.service.performNext();
     }
@@ -191,6 +194,7 @@ export class AbstractCreateController<DTO extends BaseDto, CRITERIA extends Base
     set validate(value: boolean) {
         this.service.validate = value;
     }
+
     get steps(): MenuItem[] {
         return this.service.steps;
     }
@@ -207,6 +211,7 @@ export class AbstractCreateController<DTO extends BaseDto, CRITERIA extends Base
     set activeTab(value: number) {
         this._activeTab = value;
     }
+
     get fileTempDtos(): Array<FileTempDto[]> {
         return this.service.fileTempDtos;
     }

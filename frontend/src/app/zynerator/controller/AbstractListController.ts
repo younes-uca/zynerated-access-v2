@@ -7,12 +7,12 @@ import {environment} from 'src/environments/environment';
 
 import {AuthService} from 'src/app/zynerator/security/Auth.service';
 import {ExportService} from 'src/app/zynerator/util/Export.service';
-import {RoleService} from 'src/app/zynerator/security/Role.service';
 import {AbstractService} from 'src/app/zynerator/service/AbstractService';
 import {BaseDto} from 'src/app/zynerator/dto/BaseDto.model';
 import {BaseCriteria} from 'src/app/zynerator/criteria/BaseCriteria.model';
 import {ServiceLocator} from 'src/app/zynerator/service/ServiceLocator';
 import {StringUtilService} from 'src/app/zynerator/util/StringUtil.service';
+import {RoleAdminService} from '../../controller/service/admin/stock/RoleAdmin.service';
 
 
 @Injectable()
@@ -32,7 +32,7 @@ export class AbstractListController<DTO extends BaseDto, CRITERIA extends BaseCr
     protected service: SERVICE;
     protected messageService: MessageService;
     protected confirmationService: ConfirmationService;
-    protected roleService: RoleService;
+    protected roleService: RoleAdminService;
     protected router: Router;
     protected stringUtilService: StringUtilService;
     protected authService: AuthService;
@@ -45,7 +45,7 @@ export class AbstractListController<DTO extends BaseDto, CRITERIA extends BaseCr
         this.datePipe = ServiceLocator.injector.get(DatePipe);
         this.messageService = ServiceLocator.injector.get(MessageService);
         this.confirmationService = ServiceLocator.injector.get(ConfirmationService);
-        this.roleService = ServiceLocator.injector.get(RoleService);
+        this.roleService = ServiceLocator.injector.get(RoleAdminService);
         this.router = ServiceLocator.injector.get(Router);
         this.authService= ServiceLocator.injector.get(AuthService);
         this.exportService= ServiceLocator.injector.get(ExportService);
@@ -55,6 +55,11 @@ export class AbstractListController<DTO extends BaseDto, CRITERIA extends BaseCr
         this.findPaginatedByCriteria();
         this.initExport();
         this.initCol();
+    }
+    public hasActionPermission(action: string , actionValue: boolean){
+        this.service.getModelName(this.fileName);
+        const username = this.authService.authenticatedUser.username;
+        this.service.hasActionPermission(username, action).subscribe(data => actionValue = data  , error => console.log(error) );
     }
 
     public onExcelFileSelected(event: any): void {
@@ -298,5 +303,100 @@ export class AbstractListController<DTO extends BaseDto, CRITERIA extends BaseCr
 
     set pdfName(value: string) {
         this._pdfName = value;
+    }
+    get createActionIsValid(): boolean {
+        return this.service.createActionIsValid;
+    }
+
+    set createActionIsValid(value: boolean) {
+        this.service.createActionIsValid = value;
+    }
+
+
+    get editActionIsValid(): boolean {
+        return this.service.editActionIsValid;
+    }
+
+    set editActionIsValid(value: boolean) {
+        this.service.editActionIsValid = value;
+    }
+
+    get listActionIsValid(): boolean {
+        return this.service.listActionIsValid;
+    }
+
+    set listActionIsValid(value: boolean) {
+        this.service.listActionIsValid = value;
+    }
+
+    get deleteActionIsValid(): boolean {
+        return this.service.deleteActionIsValid;
+    }
+
+    set deleteActionIsValid(value: boolean) {
+        this.service.deleteActionIsValid = value;
+    }
+   
+
+    get viewActionIsValid(): boolean {
+        return this.service.viewActionIsValid;
+    }
+
+    set viewActionIsValid(value: boolean) {
+        this.service.viewActionIsValid = value;
+    }
+
+    get duplicateActionIsValid(): boolean {
+        return this.service.duplicateActionIsValid;
+    }
+
+    set duplicateActionIsValid(value: boolean) {
+        this.service.duplicateActionIsValid = value;
+    }
+    get createAction(): string {
+        return this.service.createAction;
+    }
+
+    set createAction(value: string) {
+        this.service.createAction = value;
+    }
+
+    get listAction(): string {
+        return this.service.listAction;
+    }
+
+    set listAction(value: string) {
+        this.service.listAction = value;
+    }
+
+    get editAction(): string {
+        return this.service.editAction;
+    }
+
+    set editAction(value: string) {
+        this.service.editAction = value;
+    }
+
+    get deleteAction(): string {
+        return this.service.deleteAction;
+    }
+
+    set deleteAction(value: string) {
+        this.service.deleteAction = value;
+    }
+    get viewAction(): string {
+        return this.service.viewAction;
+    }
+
+    set viewAction(value: string) {
+        this.service.viewAction = value;
+    }
+
+    get duplicateAction(): string {
+        return this.service.duplicateAction;
+    }
+
+    set duplicateAction(value: string) {
+        this.service.duplicateAction = value;
     }
 }

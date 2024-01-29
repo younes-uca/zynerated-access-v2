@@ -1,93 +1,106 @@
 package ma.zs.easystock.zynerator.security.bean;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDateTime;
 
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import ma.zs.easystock.zynerator.audit.AuditBusinessObject;
 import jakarta.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.persistence.Table;
+
+import java.util.Objects;
+
 
 @Entity
-@Table(name = "role_app")
-public class Role implements GrantedAuthority {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+@Table(name = "role")
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@SequenceGenerator(name = "role_seq", sequenceName = "role_seq", allocationSize = 1, initialValue = 1)
+public class Role extends AuditBusinessObject implements GrantedAuthority {
+
     private Long id;
 
-    @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss.SSS")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date updatedAt;
 
-    private String authority;
+    private LocalDateTime updatedAt;
     private String label;
 
 
-    @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss.SSS")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdAt;
+    private LocalDateTime createdAt;
 
-    @ManyToMany()
-    @JoinTable(name = "roles_permissions", joinColumns = { @JoinColumn(name = "ROLE_ID") }, inverseJoinColumns = {
-         @JoinColumn(name = "PERMISSION_ID") })
-    private List<Permission> permissions = new ArrayList<>();
+    @Column(length = 500)
+    private String authority;
 
-    @ManyToMany(mappedBy = "roles")
-    @JsonIgnore
-    private List<User> users = new ArrayList<>();
-
-    public Role(){
+    public Role() {
         super();
     }
 
-    public Long getId(){
-        return this.id;
-    }
-    public void setId(Long id){
+    public Role(Long id, String authority) {
         this.id = id;
-    }
-    public String getAuthority(){
-        return this.authority;
-    }
-    public void setAuthority(String authority){
         this.authority = authority;
     }
-    public Date getCreatedAt(){
-        return this.createdAt;
+
+    public Role(String authority) {
+        this.authority = authority;
     }
-    public void setCreatedAt(Date createdAt){
-        this.createdAt = createdAt;
+
+
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "role_seq")
+    public Long getId() {
+        return this.id;
     }
-    public Date getUpdatedAt(){
-        return this.updatedAt;
+
+    public void setId(Long id) {
+        this.id = id;
     }
-    public void setUpdatedAt(Date updatedAt){
+
+    public String getAuthority() {
+        return this.authority;
+    }
+
+    public void setAuthority(String authority) {
+        this.authority = authority;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
-    }
-    public List<Permission> getPermissions() {
-        return permissions;
-    }
-
-    public void setPermissions(List<Permission> permissions) {
-        this.permissions = permissions;
-    }
-
-    public List<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
-
-    public String getLabel() {
-        return label;
     }
 
     public void setLabel(String label) {
         this.label = label;
     }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+
+    @Transient
+    public String getLabel() {
+        label = authority;
+        return label;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Role role = (Role) o;
+        return id != null && id.equals(role.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
 }
+

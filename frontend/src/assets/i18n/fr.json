@@ -28,7 +28,7 @@
     },
 
 
-    "modelPermissionUtilisateur":{
+    "modelPermissionUser":{
         "actionPermission": "Action permission",
         "actionPermissionPlaceHolder": "Select a Action permission",
         "actionPermissionPlaceHolderFilter": "Search by Action permission",
@@ -36,15 +36,15 @@
         "modelPermissionPlaceHolder": "Select a Model permission",
         "modelPermissionPlaceHolderFilter": "Search by Model permission",
         "value": "Value",
-        "utilisateur": "Utilisateur",
-        "utilisateurPlaceHolder": "Select a Utilisateur",
-        "utilisateurPlaceHolderFilter": "Search by Utilisateur",
+        "user": "User",
+        "userPlaceHolder": "Select a User",
+        "userPlaceHolderFilter": "Search by User",
         "subAttribute": "Sub attribute",
-        "modelPermissionUtilisateur": "Model permission utilisateur",
-        "tabPan": "Model permission utilisateur",
-        "header": "Liste des model permission utilisateurs",
-        "deleteModelPermissionUtilisateurConfirmationMessage": "Are you sure you want to delete model permission utilisateur",
-        "deleteModelPermissionUtilisateursConfirmationMessage": "Are you sure you want to delete the selected elements"
+        "modelPermissionUser": "Model permission user",
+        "tabPan": "Model permission user",
+        "header": "Liste des model permission users",
+        "deleteModelPermissionUserConfirmationMessage": "Are you sure you want to delete model permission user",
+        "deleteModelPermissionUsersConfirmationMessage": "Are you sure you want to delete the selected elements"
     },
 
 
@@ -129,13 +129,13 @@
     },
 
 
-    "droit":{
+    "role":{
         "authority": "Authority",
-        "droit": "Droit",
-        "tabPan": "Droit",
-        "header": "Liste des droits",
-        "deleteDroitConfirmationMessage": "Are you sure you want to delete droit",
-        "deleteDroitsConfirmationMessage": "Are you sure you want to delete the selected elements"
+        "role": "Role",
+        "tabPan": "Role",
+        "header": "Liste des roles",
+        "deleteRoleConfirmationMessage": "Are you sure you want to delete role",
+        "deleteRolesConfirmationMessage": "Are you sure you want to delete the selected elements"
     },
 
 
@@ -157,22 +157,22 @@
     },
 
 
-    "droitUtilisateur":{
-        "droit": "Droit",
-        "droitPlaceHolder": "Select a Droit",
-        "droitPlaceHolderFilter": "Search by Droit",
-        "utilisateur": "Utilisateur",
-        "utilisateurPlaceHolder": "Select a Utilisateur",
-        "utilisateurPlaceHolderFilter": "Search by Utilisateur",
-        "droitUtilisateur": "Droit utilisateur",
-        "tabPan": "Droit utilisateur",
-        "header": "Liste des droit utilisateurs",
-        "deleteDroitUtilisateurConfirmationMessage": "Are you sure you want to delete droit utilisateur",
-        "deleteDroitUtilisateursConfirmationMessage": "Are you sure you want to delete the selected elements"
+    "roleUser":{
+        "role": "Role",
+        "rolePlaceHolder": "Select a Role",
+        "rolePlaceHolderFilter": "Search by Role",
+        "user": "User",
+        "userPlaceHolder": "Select a User",
+        "userPlaceHolderFilter": "Search by User",
+        "roleUser": "Role user",
+        "tabPan": "Role user",
+        "header": "Liste des role users",
+        "deleteRoleUserConfirmationMessage": "Are you sure you want to delete role user",
+        "deleteRoleUsersConfirmationMessage": "Are you sure you want to delete the selected elements"
     },
 
 
-    "utilisateur":{
+    "user":{
         "credentialsNonExpired": "Credentials non expired",
         "enabled": "Enabled",
         "email": "Email",
@@ -181,14 +181,14 @@
         "username": "Username",
         "password": "Password",
         "passwordChanged": "Password changed",
-        "modelPermissionUtilisateurs": "Model permission utilisateurs",
-        "droitUtilisateurs": "Droit utilisateurs",
-        "DroitUtilisateursPlaceHolder": "Select multiple Droits",
-        "utilisateur": "Utilisateur",
-        "tabPan": "Utilisateur",
-        "header": "Liste des utilisateurs",
-        "deleteUtilisateurConfirmationMessage": "Are you sure you want to delete utilisateur",
-        "deleteUtilisateursConfirmationMessage": "Are you sure you want to delete the selected elements"
+        "modelPermissionUsers": "Model permission users",
+        "roleUsers": "Role users",
+        "RoleUsersPlaceHolder": "Select multiple Roles",
+        "user": "User",
+        "tabPan": "User",
+        "header": "Liste des users",
+        "deleteUserConfirmationMessage": "Are you sure you want to delete user",
+        "deleteUsersConfirmationMessage": "Are you sure you want to delete the selected elements"
     },
 
 

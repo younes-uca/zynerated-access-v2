@@ -1,12 +1,12 @@
 package ma.zs.easystock.zynerator.service;
 
+import ma.zs.easystock.zynerator.security.bean.User;
+import ma.zs.easystock.zynerator.security.service.facade.UserAdminService;
 import ma.zs.easystock.zynerator.audit.AuditBusinessObject;
 import ma.zs.easystock.zynerator.criteria.BaseCriteria;
 import ma.zs.easystock.zynerator.exception.BusinessRuleException;
 import ma.zs.easystock.zynerator.exception.EntityNotFoundException;
 import ma.zs.easystock.zynerator.repository.AbstractRepository;
-import ma.zs.easystock.zynerator.security.bean.User;
-import ma.zs.easystock.zynerator.security.service.facade.UserService;
 import ma.zs.easystock.zynerator.specification.AbstractSpecification;
 import ma.zs.easystock.zynerator.util.FileUtils;
 import ma.zs.easystock.zynerator.util.ListUtil;
@@ -48,7 +48,7 @@ public abstract class AbstractServiceImpl<T extends AuditBusinessObject, CRITERI
 
     protected REPO dao;
     @Autowired
-    protected UserService userService;
+    protected UserAdminService userService;
 
     protected Class<T> itemClass;
 
@@ -72,6 +72,7 @@ public abstract class AbstractServiceImpl<T extends AuditBusinessObject, CRITERI
     public boolean deleteById(Long id) {
         boolean condition = deleteByIdCheckCondition(id);
         if (condition) {
+            deleteAssociatedLists(id);
             dao.deleteById(id);
         }
         return condition;

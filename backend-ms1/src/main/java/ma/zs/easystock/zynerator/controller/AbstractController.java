@@ -227,10 +227,9 @@ public class AbstractController<T extends AuditBusinessObject, DTO extends BaseD
         ResponseEntity<Long> res;
         HttpStatus status = HttpStatus.PRECONDITION_FAILED;
         if (id != null) {
-            boolean resultDelete = service.deleteById(id);
-            if (resultDelete) {
-                status = HttpStatus.OK;
-            }
+            T t = service.findWithAssociatedLists(id);
+            service.delete(Arrays.asList(t));
+            status = HttpStatus.OK;
         }
         res = new ResponseEntity<>(id, status);
         return res;

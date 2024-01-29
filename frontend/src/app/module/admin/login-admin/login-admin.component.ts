@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {Router} from '@angular/router';
 
 import { AuthService } from 'src/app/zynerator/security/Auth.service';
+import {Message, MessageService} from 'primeng/api';
 
 
 @Component({
@@ -15,9 +16,12 @@ export class LoginAdminComponent implements OnInit {
     username: new FormControl('',Validators.required),
     password: new FormControl('',Validators.required)
   });
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private messageService: MessageService) { }
+  messages: Message[] = [];
 
   ngOnInit(): void {
+      this.messages = [];
+
   }
 
   submit(){

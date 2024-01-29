@@ -34,9 +34,7 @@ import { AppMenuComponent } from './menu/app.menu.component';
 import {LoginComponent} from 'src/app/login/login.component';
 
 import {AccessDeniedComponent} from 'src/app/template/access-denied/access-denied.component';
-import {UserListComponent} from './module/user-list/user-list.component';
-import {UserService} from './zynerator/security/User.service';
-import {RoleService} from './zynerator/security/Role.service';
+
 import {HomeComponent} from './home/home.component';
 import {InputSwitchModule} from 'primeng/inputswitch';
 
@@ -56,6 +54,8 @@ import {ServiceLocator} from './zynerator/service/ServiceLocator';
 
 import {AdminModule} from './module/admin/admin.module';
 import {AdminRoutingModule} from './module/admin/admin-routing.module';
+import {UserAdminService} from './controller/service/admin/stock/UserAdmin.service';
+import {RoleAdminService} from './controller/service/admin/stock/RoleAdmin.service';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -91,7 +91,6 @@ imports: [
   ToastModule,
   FileUploadModule,
   SelectButtonModule,
-
   AdminModule,
   AdminRoutingModule,
 
@@ -115,15 +114,14 @@ declarations: [
   AppRightMenuComponent,
   AppTopBarComponent,
   AppFooterComponent,
-  UserListComponent,
   HomeComponent
 ],
 providers: [
 /*    { provide: LocationStrategy, useClass: HashLocationStrategy }, */
   {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
-  UserService,
+  UserAdminService,
   MenuService,
-  RoleService,
+  RoleAdminService,
   MessageService,
   ConfirmationService,
   DatePipe,

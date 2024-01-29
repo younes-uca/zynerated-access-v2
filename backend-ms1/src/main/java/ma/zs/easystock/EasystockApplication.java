@@ -1,31 +1,26 @@
 package ma.zs.easystock;
 
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import ma.zs.easystock.zynerator.security.service.facade.ActionPermissionAdminService;
+import ma.zs.easystock.zynerator.security.service.facade.ModelPermissionAdminService;
+import ma.zs.easystock.zynerator.security.service.facade.RoleAdminService;
+import ma.zs.easystock.zynerator.security.service.facade.UserAdminService;
+import ma.zs.easystock.zynerator.security.bean.*;
+import ma.zs.easystock.zynerator.security.common.AuthoritiesConstants;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
-import java.util.*;
-import java.util.stream.Stream;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.client.RestTemplate;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import org.springframework.cache.annotation.EnableCaching;
-import com.fasterxml.jackson.databind.SerializationFeature;
-
-
-import ma.zs.easystock.zynerator.security.common.AuthoritiesConstants;
-import ma.zs.easystock.zynerator.security.bean.User;
-import ma.zs.easystock.zynerator.security.bean.Permission;
-import ma.zs.easystock.zynerator.security.bean.Role;
-import ma.zs.easystock.zynerator.security.service.facade.UserService;
-import ma.zs.easystock.zynerator.security.service.facade.RoleService;
-
-//import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
-import org.springframework.web.client.RestTemplate;
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootApplication
 @EnableCaching
@@ -35,16 +30,16 @@ public class EasystockApplication {
     public static ConfigurableApplicationContext ctx;
 
     public static void main(String[] args) {
-        ctx=SpringApplication.run(EasystockApplication.class, args);
+        ctx = SpringApplication.run(EasystockApplication.class, args);
     }
 
     @Bean
-    RestTemplate restTemplate(){
+    RestTemplate restTemplate() {
         return new RestTemplate();
     }
 
     @Bean
-    ObjectMapper objectMapper(){
+    ObjectMapper objectMapper() {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
         objectMapper.registerModule(new JavaTimeModule());
@@ -56,31 +51,52 @@ public class EasystockApplication {
     }
 
     @Bean
-    public CommandLineRunner demo(UserService userService, RoleService roleService) {
-    return (args) -> {
-        if(true){
+    public CommandLineRunner demo(UserAdminService userService, RoleAdminService roleService, ModelPermissionAdminService modelPermissionService, ActionPermissionAdminService actionPermissionService) {
+        return (args) -> {
+            if (true) {
 
 
+                // ModelPermissions For admin
+                List<ModelPermission> modelPermissions = new ArrayList<>();
+                addPermissionForAdmin(modelPermissions);
+                modelPermissions.forEach(e -> modelPermissionService.create(e));
+                // ModelPermissions For admin
+                List<ActionPermission> actionPermissions = new ArrayList<>();
+                addActionPermissionForAdmin(actionPermissions);
+                actionPermissions.forEach(e -> actionPermissionService.create(e));
+                // User admin
+                User userForAdmin = new User("admin");
+                userForAdmin.setPassword("123");
+                // Role admin
+                Role roleForAdmin = new Role();
+                roleForAdmin.setAuthority(AuthoritiesConstants.ADMIN);
+                roleForAdmin.setCreatedAt(LocalDateTime.now());
+                roleService.create(roleForAdmin);
+                RoleUser roleUser = new RoleUser();
+                roleUser.setRole(roleForAdmin);
+                if (userForAdmin.getRoleUsers() == null)
+                    userForAdmin.setRoleUsers(new ArrayList<>());
 
-    // Role admin
+                userForAdmin.getRoleUsers().add(roleUser);
+                if (userForAdmin.getModelPermissionUsers() == null)
+                    userForAdmin.setModelPermissionUsers(new ArrayList<>());
 
-        User userForAdmin = new User("admin");
 
-        Role roleForAdmin = new Role();
-        roleForAdmin.setAuthority(AuthoritiesConstants.ADMIN);
-        List<Permission> permissionsForAdmin = new ArrayList<>();
-        addPermissionForAdmin(permissionsForAdmin);
-        roleForAdmin.setPermissions(permissionsForAdmin);
-        if(userForAdmin.getRoles()==null)
-            userForAdmin.setRoles(new ArrayList<>());
+                modelPermissions.forEach(model -> {
+                    actionPermissions.forEach(action -> {
+                        ModelPermissionUser permissionUser = new ModelPermissionUser();
+                        permissionUser.setModelPermission(model);
+                        permissionUser.setActionPermission(action);
+                        permissionUser.setValue(true);
+                        permissionUser.setUser(userForAdmin);
+                        userForAdmin.getModelPermissionUsers().add(permissionUser);
+                    });
+                });
+                userService.create(userForAdmin);
 
-        userForAdmin.getRoles().add(roleForAdmin);
-        userService.save(userForAdmin);
             }
         };
     }
-
-
 
 
     private static String fakeString(String attributeName, int i) {
@@ -88,10 +104,11 @@ public class EasystockApplication {
     }
 
     private static Long fakeLong(String attributeName, int i) {
-        return  10L * i;
+        return 10L * i;
     }
+
     private static Integer fakeInteger(String attributeName, int i) {
-        return  10 * i;
+        return 10 * i;
     }
 
     private static Double fakeDouble(String attributeName, int i) {
@@ -99,76 +116,33 @@ public class EasystockApplication {
     }
 
     private static BigDecimal fakeBigDecimal(String attributeName, int i) {
-        return  BigDecimal.valueOf(i*1L*10);
+        return BigDecimal.valueOf(i * 1L * 10);
     }
 
     private static Boolean fakeBoolean(String attributeName, int i) {
         return i % 2 == 0 ? true : false;
     }
+
     private static LocalDateTime fakeLocalDateTime(String attributeName, int i) {
         return LocalDateTime.now().plusDays(i);
     }
-    private static void addPermissionForAdmin(List<Permission> permissions){
-        permissions.add(new Permission("ActionPermission.edit"));
-        permissions.add(new Permission("ActionPermission.list"));
-        permissions.add(new Permission("ActionPermission.view"));
-        permissions.add(new Permission("ActionPermission.add"));
-        permissions.add(new Permission("ActionPermission.delete"));
-        permissions.add(new Permission("ModelPermissionUtilisateur.edit"));
-        permissions.add(new Permission("ModelPermissionUtilisateur.list"));
-        permissions.add(new Permission("ModelPermissionUtilisateur.view"));
-        permissions.add(new Permission("ModelPermissionUtilisateur.add"));
-        permissions.add(new Permission("ModelPermissionUtilisateur.delete"));
-        permissions.add(new Permission("PaiementAchat.edit"));
-        permissions.add(new Permission("PaiementAchat.list"));
-        permissions.add(new Permission("PaiementAchat.view"));
-        permissions.add(new Permission("PaiementAchat.add"));
-        permissions.add(new Permission("PaiementAchat.delete"));
-        permissions.add(new Permission("CategorieProduit.edit"));
-        permissions.add(new Permission("CategorieProduit.list"));
-        permissions.add(new Permission("CategorieProduit.view"));
-        permissions.add(new Permission("CategorieProduit.add"));
-        permissions.add(new Permission("CategorieProduit.delete"));
-        permissions.add(new Permission("Produit.edit"));
-        permissions.add(new Permission("Produit.list"));
-        permissions.add(new Permission("Produit.view"));
-        permissions.add(new Permission("Produit.add"));
-        permissions.add(new Permission("Produit.delete"));
-        permissions.add(new Permission("Achat.edit"));
-        permissions.add(new Permission("Achat.list"));
-        permissions.add(new Permission("Achat.view"));
-        permissions.add(new Permission("Achat.add"));
-        permissions.add(new Permission("Achat.delete"));
-        permissions.add(new Permission("Droit.edit"));
-        permissions.add(new Permission("Droit.list"));
-        permissions.add(new Permission("Droit.view"));
-        permissions.add(new Permission("Droit.add"));
-        permissions.add(new Permission("Droit.delete"));
-        permissions.add(new Permission("Client.edit"));
-        permissions.add(new Permission("Client.list"));
-        permissions.add(new Permission("Client.view"));
-        permissions.add(new Permission("Client.add"));
-        permissions.add(new Permission("Client.delete"));
-        permissions.add(new Permission("DroitUtilisateur.edit"));
-        permissions.add(new Permission("DroitUtilisateur.list"));
-        permissions.add(new Permission("DroitUtilisateur.view"));
-        permissions.add(new Permission("DroitUtilisateur.add"));
-        permissions.add(new Permission("DroitUtilisateur.delete"));
-        permissions.add(new Permission("Utilisateur.edit"));
-        permissions.add(new Permission("Utilisateur.list"));
-        permissions.add(new Permission("Utilisateur.view"));
-        permissions.add(new Permission("Utilisateur.add"));
-        permissions.add(new Permission("Utilisateur.delete"));
-        permissions.add(new Permission("ModelPermission.edit"));
-        permissions.add(new Permission("ModelPermission.list"));
-        permissions.add(new Permission("ModelPermission.view"));
-        permissions.add(new Permission("ModelPermission.add"));
-        permissions.add(new Permission("ModelPermission.delete"));
-        permissions.add(new Permission("AchatItem.edit"));
-        permissions.add(new Permission("AchatItem.list"));
-        permissions.add(new Permission("AchatItem.view"));
-        permissions.add(new Permission("AchatItem.add"));
-        permissions.add(new Permission("AchatItem.delete"));
+
+    private static void addPermissionForAdmin(List<ModelPermission> modelPermissions) {
+        modelPermissions.add(new ModelPermission("PaiementAchat"));
+        modelPermissions.add(new ModelPermission("CategorieProduit"));
+        modelPermissions.add(new ModelPermission("Produit"));
+        modelPermissions.add(new ModelPermission("Achat"));
+        modelPermissions.add(new ModelPermission("Client"));
+        modelPermissions.add(new ModelPermission("User"));
+        modelPermissions.add(new ModelPermission("AchatItem"));
+    }
+    private static void addActionPermissionForAdmin(List<ActionPermission> actionPermissions) {
+        actionPermissions.add(new ActionPermission("list"));
+        actionPermissions.add(new ActionPermission("create"));
+        actionPermissions.add(new ActionPermission("delete"));
+        actionPermissions.add(new ActionPermission("edit"));
+        actionPermissions.add(new ActionPermission("view"));
+        actionPermissions.add(new ActionPermission("duplicate"));
     }
 
 }

@@ -6,10 +6,8 @@ import org.springframework.util.StringUtils;
 import java.sql.Timestamp;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Locale;
+import java.time.format.DateTimeParseException;
+import java.util.*;
 
 public class DateUtil {
 
@@ -21,6 +19,7 @@ public class DateUtil {
     public final static String DATE_FORMAT_FILE = "yyMMddHHmmss";
     public static final String HOUR_FORMAT = "HH:mm:ss";
     public static final String DATE_FORMAT_ENG = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
+    public static final String DATE_FORMAT_ALTERNATIVE = "MM/dd/yyyy HH:mm";
     public static final String DATE_FORMAT_PF = "EEE MMM dd HH:mm:ss z yyyy";
     public static final long ONE_HOUR = 60 * 60 * 1000L;
 
@@ -45,9 +44,19 @@ public class DateUtil {
     }
 
     public static LocalDateTime stringEnToDate(final String strDate) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT_ENG, Locale.ENGLISH);
-        return LocalDateTime.parse(strDate, formatter);
+        List<String> dateFormats = Arrays.asList(DATE_FORMAT_ENG, DATE_FORMAT_ALTERNATIVE);
 
+        for (String format : dateFormats) {
+            try {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format, Locale.ENGLISH);
+                return LocalDateTime.parse(strDate, formatter);
+            } catch (DateTimeParseException e) {
+                // Ignore and try the next format
+            }
+        }
+
+        // Handle case where none of the formats match
+        throw new DateTimeParseException("Unable to parse date: " + strDate, strDate, 0);
     }
 
     public static String getCurrentDate() {

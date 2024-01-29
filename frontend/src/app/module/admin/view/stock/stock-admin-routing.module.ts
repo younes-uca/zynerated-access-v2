@@ -8,16 +8,16 @@ import { AuthGuard } from 'src/app/controller/guards/auth.guard';
 
 
 import { ActionPermissionListAdminComponent } from './action-permission/list/action-permission-list-admin.component';
-import { ModelPermissionUtilisateurListAdminComponent } from './model-permission-utilisateur/list/model-permission-utilisateur-list-admin.component';
 import { PaiementAchatListAdminComponent } from './paiement-achat/list/paiement-achat-list-admin.component';
 import { CategorieProduitListAdminComponent } from './categorie-produit/list/categorie-produit-list-admin.component';
 import { ProduitListAdminComponent } from './produit/list/produit-list-admin.component';
 import { AchatListAdminComponent } from './achat/list/achat-list-admin.component';
-import { DroitListAdminComponent } from './droit/list/droit-list-admin.component';
 import { ClientListAdminComponent } from './client/list/client-list-admin.component';
-import { UtilisateurListAdminComponent } from './utilisateur/list/utilisateur-list-admin.component';
 import { ModelPermissionListAdminComponent } from './model-permission/list/model-permission-list-admin.component';
 import { AchatItemListAdminComponent } from './achat-item/list/achat-item-list-admin.component';
+import {UserListAdminComponent} from './utilisateur/list/user-list-admin.component';
+import {ModelPermissionUserListAdminComponent} from './model-permission-utilisateur/list/model-permission-user-list-admin.component';
+import {RoleListAdminComponent} from './role/list/role-list-admin.component';
 @NgModule({
     imports: [
         RouterModule.forChild(
@@ -41,11 +41,11 @@ import { AchatItemListAdminComponent } from './achat-item/list/achat-item-list-a
 
                         {
 
-                            path: 'model-permission-utilisateur',
+                            path: 'model-permission-user',
                             children: [
                                 {
                                     path: 'list',
-                                    component: ModelPermissionUtilisateurListAdminComponent ,
+                                    component: ModelPermissionUserListAdminComponent ,
                                     canActivate: [AuthGuard]
                                 }
                             ]
@@ -101,11 +101,11 @@ import { AchatItemListAdminComponent } from './achat-item/list/achat-item-list-a
 
                         {
 
-                            path: 'droit',
+                            path: 'role',
                             children: [
                                 {
                                     path: 'list',
-                                    component: DroitListAdminComponent ,
+                                    component: RoleListAdminComponent ,
                                     canActivate: [AuthGuard]
                                 }
                             ]
@@ -125,11 +125,11 @@ import { AchatItemListAdminComponent } from './achat-item/list/achat-item-list-a
 
                         {
 
-                            path: 'utilisateur',
+                            path: 'user',
                             children: [
                                 {
                                     path: 'list',
-                                    component: UtilisateurListAdminComponent ,
+                                    component: UserListAdminComponent ,
                                     canActivate: [AuthGuard]
                                 }
                             ]

@@ -1,18 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 
-import {
-  trigger,
-  state,
-  style,
-  transition,
-  animate,
-} from '@angular/animations';
+import {animate, state, style, transition, trigger,} from '@angular/animations';
 
-import { AppComponent } from 'src/app/app.component';
-import { AuthService } from 'src/app/zynerator/security/Auth.service';
-import { RoleService } from 'src/app/zynerator/security/Role.service';
+import {AppComponent} from 'src/app/app.component';
+import {AuthService} from 'src/app/zynerator/security/Auth.service';
 import {AppMainComponent} from 'src/app/template/app.main.component';
+import {RoleAdminService} from '../controller/service/admin/stock/RoleAdmin.service';
 
 @Component({
   selector: 'app-menu',
@@ -60,7 +54,7 @@ export class AppMenuComponent implements OnInit {
   model: any[];
   modelanonymous: any[];
     modelAdmin: any[];
-  constructor(public app: AppComponent, public appMain: AppMainComponent, private roleService: RoleService, private authService:AuthService, private router: Router) {}
+  constructor(public app: AppComponent, public appMain: AppMainComponent, private roleService: RoleAdminService, private authService:AuthService, private router: Router) {}
 
   ngOnInit() {
     this.modelAdmin =
@@ -103,13 +97,40 @@ export class AppMenuComponent implements OnInit {
                           },
                 ]
               },
+          {
+              label: 'User',
+              icon: 'pi pi-wallet',
+              items: [
+                  {
+                      label: 'Liste User',
+                      icon: 'pi pi-fw pi-plus-circle',
+                      routerLink: ['/app/admin/stock/user/list']
+                  },
+              ]
+          },
+          {
+              label: 'Model Permission',
+              icon: 'pi pi-wallet',
+              items: [
+                  {
+                      label: 'Liste Model',
+                      icon: 'pi pi-fw pi-plus-circle',
+                      routerLink: ['/app/admin/stock/model-permission/list']
+                  },
+                  {
+                      label: 'Liste Action Permission',
+                      icon: 'pi pi-fw pi-plus-circle',
+                      routerLink: ['/app/admin/stock/action-permission/list']
+                  },
+              ]
+          },
     ];
         if (this.authService.authenticated) {
-            if (this.authService.authenticatedUser.roles) {
-              this.authService.authenticatedUser.roles.forEach(role => {
-                  const roleName: string = this.getRole(role);
+            if (this.authService.authenticatedUser.roleUsers) {
+              this.authService.authenticatedUser.roleUsers.forEach(role => {
+                  const roleName: string = this.getRole(role.role.authority);
                   this.roleService._role.next(roleName.toUpperCase());
-                  eval('this.model = this.model' + this.getRole(role));
+                  eval('this.model = this.model' + this.getRole(role.role.authority));
               })
             }
         }

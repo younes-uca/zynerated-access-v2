@@ -1,7 +1,6 @@
 package ma.zs.easystock.zynerator.audit;
 
 import ma.zs.easystock.zynerator.security.bean.User;
-
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import jakarta.persistence.PrePersist;

@@ -13,6 +13,7 @@ import {ClientDto} from 'src/app/controller/model/stock/Client.model';
 import {ClientAdminService} from 'src/app/controller/service/admin/stock/ClientAdmin.service';
 import {AchatItemDto} from 'src/app/controller/model/stock/AchatItem.model';
 import {AchatItemAdminService} from 'src/app/controller/service/admin/stock/AchatItemAdmin.service';
+import {AuthService} from '../../../../../../zynerator/security/Auth.service';
 
 
 @Component({
@@ -26,7 +27,7 @@ export class AchatListAdminComponent extends AbstractListController<AchatDto, Ac
     clients: Array<ClientDto>;
 
 
-    constructor( private achatService: AchatAdminService  , private achatItemService: AchatItemAdminService, private produitService: ProduitAdminService, private paiementAchatService: PaiementAchatAdminService, private clientService: ClientAdminService) {
+    constructor(private achatService: AchatAdminService  , private achatItemService: AchatItemAdminService, private produitService: ProduitAdminService, private paiementAchatService: PaiementAchatAdminService, private clientService: ClientAdminService) {
         super(achatService);
     }
 
@@ -35,6 +36,12 @@ export class AchatListAdminComponent extends AbstractListController<AchatDto, Ac
         this.initExport();
         this.initCol();
         this.loadClient();
+        this.hasCreateActionPermission(this.createAction);
+        this.hasEditeActionPermission(this.editAction);
+        this.hasDeleteActionPermission(this.deleteAction);
+        this.hasListActionPermission(this.listAction);
+        this.hasViewActionPermission(this.viewAction);
+        this.hasDuplicateActionPermission(this.duplicateAction);
     }
 
 
@@ -47,10 +54,38 @@ export class AchatListAdminComponent extends AbstractListController<AchatDto, Ac
             {field: 'client?.nom', header: 'Client'},
         ];
     }
-
-
+    public hasCreateActionPermission(action: string){
+        this.service.getModelName(this.fileName);
+        const username = this.authService.authenticatedUser.username;
+        this.achatService.hasActionPermission(username, action).subscribe(data => this.createActionIsValid = data  , error => console.log(error) );
+    }
+    public hasEditeActionPermission(action: string){
+        this.service.getModelName(this.fileName);
+        const username = this.authService.authenticatedUser.username;
+        this.achatService.hasActionPermission(username, action).subscribe(data => this.editActionIsValid = data  , error => console.log(error) );
+    }
+    public hasDeleteActionPermission(action: string){
+        this.service.getModelName(this.fileName);
+        const username = this.authService.authenticatedUser.username;
+        this.achatService.hasActionPermission(username, action).subscribe(data => this.deleteActionIsValid = data  , error => console.log(error) );
+    }
+    public hasListActionPermission(action: string){
+        this.service.getModelName(this.fileName);
+        const username = this.authService.authenticatedUser.username;
+        this.achatService.hasActionPermission(username, action).subscribe(data => this.listActionIsValid = data  , error => console.log(error) );
+    }
+    public hasDuplicateActionPermission(action: string){
+        this.service.getModelName(this.fileName);
+        const username = this.authService.authenticatedUser.username;
+        this.achatService.hasActionPermission(username, action).subscribe(data => this.duplicateActionIsValid = data  , error => console.log(error) );
+    }
+    public hasViewActionPermission(action: string){
+        this.service.getModelName(this.fileName);
+        const username = this.authService.authenticatedUser.username;
+        this.achatService.hasActionPermission(username, action).subscribe(data => this.viewActionIsValid = data  , error => console.log(error) );
+    }
     public async loadClient(){
-       this.clientService.findAllOptimized().subscribe(clients => this.clients = clients, error => console.log(error))
+       this.clientService.findAllOptimized().subscribe(clients => this.clients = clients, error => console.log(error));
     }
 
 	public initDuplicate(res: AchatDto) {
@@ -66,25 +101,27 @@ export class AchatListAdminComponent extends AbstractListController<AchatDto, Ac
    public prepareColumnExport(): void {
         this.exportData = this.items.map(e => {
             return {
-                 'Reference': e.reference ,
+                 Reference: e.reference ,
                 'Date achat': this.datePipe.transform(e.dateAchat , 'dd/MM/yyyy hh:mm'),
-                 'Total': e.total ,
+                 Total: e.total ,
                  'Total paye': e.totalPaye ,
-                 'Description': e.description ,
-                'Client': e.client?.nom ,
-            }
+                 Description: e.description ,
+                Client: e.client?.nom ,
+            };
         });
 
         this.criteriaData = [{
-            'Reference': this.criteria.reference ? this.criteria.reference : environment.emptyForExport ,
+            Reference: this.criteria.reference ? this.criteria.reference : environment.emptyForExport ,
             'Date achat Min': this.criteria.dateAchatFrom ? this.datePipe.transform(this.criteria.dateAchatFrom , this.dateFormat) : environment.emptyForExport ,
             'Date achat Max': this.criteria.dateAchatTo ? this.datePipe.transform(this.criteria.dateAchatTo , this.dateFormat) : environment.emptyForExport ,
             'Total Min': this.criteria.totalMin ? this.criteria.totalMin : environment.emptyForExport ,
             'Total Max': this.criteria.totalMax ? this.criteria.totalMax : environment.emptyForExport ,
             'Total paye Min': this.criteria.totalPayeMin ? this.criteria.totalPayeMin : environment.emptyForExport ,
             'Total paye Max': this.criteria.totalPayeMax ? this.criteria.totalPayeMax : environment.emptyForExport ,
-            'Description': this.criteria.description ? this.criteria.description : environment.emptyForExport ,
-        //'Client': this.criteria.client?.nom ? this.criteria.client?.nom : environment.emptyForExport ,
+            Description: this.criteria.description ? this.criteria.description : environment.emptyForExport ,
+        // 'Client': this.criteria.client?.nom ? this.criteria.client?.nom : environment.emptyForExport ,
         }];
       }
+
+
 }

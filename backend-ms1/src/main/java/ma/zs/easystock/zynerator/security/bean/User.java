@@ -1,62 +1,51 @@
 package ma.zs.easystock.zynerator.security.bean;
 
-import ma.zs.easystock.zynerator.bean.Etablissement;
-import ma.zs.easystock.zynerator.audit.AuditBusinessObject;
-
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.Collection;
+import java.util.Objects;
+import java.util.List;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
-import jakarta.persistence.Transient;
-import jakarta.persistence.Table;
 
-import org.springframework.security.core.userdetails.UserDetails;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
-import com.fasterxml.jackson.annotation.JsonFormat;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import ma.zs.easystock.zynerator.audit.AuditBusinessObject;
 import jakarta.persistence.*;
+import ma.zs.easystock.zynerator.bean.Etablissement;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 
 @Entity
-@Table(name = "user_app")
-@Inheritance(strategy = InheritanceType.JOINED)
-public class User  extends AuditBusinessObject  implements UserDetails {
+@Table(name = "user")
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@SequenceGenerator(name = "utilisateur_seq", sequenceName = "utilisateur_seq", allocationSize = 1, initialValue = 1)
+public class User extends AuditBusinessObject implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    protected Long id;
-    protected boolean credentialsNonExpired = true;
-    protected boolean enabled = true;
-    protected LocalDateTime createdAt;
-    protected LocalDateTime updatedAt;
-    protected String email;
-    protected boolean accountNonExpired = true;
-    protected boolean accountNonLocked = true;
-    protected String username;
-    protected String password;
-    protected boolean passwordChanged = false;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "utilisateur_seq")
+    private Long id;
+    private boolean credentialsNonExpired = true;
+    private boolean enabled = true;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    private String email;
+    private boolean accountNonExpired = true;
+    private boolean accountNonLocked = true;
+    private String username;
+    private String password;
+    private boolean passwordChanged = false;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "users_roles", joinColumns = {@JoinColumn(name = "USER_ID")}, inverseJoinColumns = {
-    @JoinColumn(name = "ROLE_ID")})
-    protected Collection<Role> roles = new ArrayList<>();
+
 
     @ManyToOne
-    protected Etablissement etablissement;
+    private Etablissement etablissement;
     @Transient
-    protected Collection<Role> authorities;
-
+    private Collection<GrantedAuthority> authorities;
+    @OneToMany(mappedBy = "user")
+    private List<ModelPermissionUser> modelPermissionUsers;
+    @OneToMany(mappedBy = "user")
+    private List<RoleUser> roleUsers;
 
     public User() {
-         super();
+        super();
     }
 
     public User(String username) {
@@ -67,139 +56,174 @@ public class User  extends AuditBusinessObject  implements UserDetails {
 
 
     public boolean getCredentialsNonExpired() {
-    return credentialsNonExpired;
+        return credentialsNonExpired;
     }
 
     public boolean getEnabled() {
-    return enabled;
+        return enabled;
     }
 
     public boolean getAccountNonExpired() {
-    return accountNonExpired;
+        return accountNonExpired;
     }
 
     public boolean getAccountNonLocked() {
-    return accountNonLocked;
+        return accountNonLocked;
     }
 
     public boolean getPasswordChanged() {
-    return passwordChanged;
+        return passwordChanged;
     }
 
 
     public Long getId() {
-    return id;
+        return id;
     }
 
     public void setId(Long id) {
-    this.id = id;
+        this.id = id;
     }
 
     public boolean isCredentialsNonExpired() {
-    return credentialsNonExpired;
+        return credentialsNonExpired;
     }
 
     public void setCredentialsNonExpired(boolean credentialsNonExpired) {
-    this.credentialsNonExpired = credentialsNonExpired;
+        this.credentialsNonExpired = credentialsNonExpired;
     }
 
     public Etablissement getEtablissement() {
-    return etablissement;
+        return etablissement;
     }
 
     public void setEtablissement(Etablissement etablissement) {
-    this.etablissement = etablissement;
+        this.etablissement = etablissement;
     }
 
-    public Collection<Role> getRoles() {
-        return roles;
-    }
 
-    public void setRoles(Collection<Role> roles) {
-    this.roles = roles;
-    }
 
     public boolean isEnabled() {
-    return enabled;
+        return enabled;
     }
 
     public void setEnabled(boolean enabled) {
-    this.enabled = enabled;
+        this.enabled = enabled;
     }
 
     public LocalDateTime getCreatedAt() {
-    return createdAt;
+        return createdAt;
     }
 
     public void setCreatedAt(LocalDateTime createdAt) {
-    this.createdAt = createdAt;
+        this.createdAt = createdAt;
     }
 
     public LocalDateTime getUpdatedAt() {
-    return updatedAt;
+        return updatedAt;
     }
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
-    this.updatedAt = updatedAt;
+        this.updatedAt = updatedAt;
     }
 
     public String getEmail() {
-    return email;
+        return email;
     }
 
     public void setEmail(String email) {
-    this.email = email;
+        this.email = email;
     }
 
     public boolean isAccountNonExpired() {
-    return accountNonExpired;
+        return accountNonExpired;
     }
 
     public void setAccountNonExpired(boolean accountNonExpired) {
-    this.accountNonExpired = accountNonExpired;
+        this.accountNonExpired = accountNonExpired;
     }
 
     public boolean isAccountNonLocked() {
-    return accountNonLocked;
+        return accountNonLocked;
     }
 
     public void setAccountNonLocked(boolean accountNonLocked) {
-    this.accountNonLocked = accountNonLocked;
+        this.accountNonLocked = accountNonLocked;
     }
 
     public String getUsername() {
-    return username;
+        return username;
     }
 
     public void setUsername(String username) {
-    this.username = username;
+        this.username = username;
     }
 
 
-    public Collection<Role> getAuthorities() {
-    if (this.authorities == null)
-    this.authorities = this.roles;
-    return authorities;
+    public Collection<GrantedAuthority> getAuthorities() {
+        return this.authorities;
     }
 
-    public void setAuthorities(Collection<Role> authorities) {
-    this.authorities = authorities;
+    public void setAuthorities(Collection<GrantedAuthority> authorities) {
+        this.authorities = authorities;
     }
 
     public String getPassword() {
-    return password;
+        return password;
     }
 
     public void setPassword(String password) {
-    this.password = password;
+        this.password = password;
     }
 
     public boolean isPasswordChanged() {
-    return passwordChanged;
+        return passwordChanged;
     }
 
     public void setPasswordChanged(boolean passwordChanged) {
-    this.passwordChanged = passwordChanged;
+        this.passwordChanged = passwordChanged;
+    }
+
+
+
+
+    public List<ModelPermissionUser> getModelPermissionUsers() {
+        return this.modelPermissionUsers;
+    }
+
+    public void setModelPermissionUsers(List<ModelPermissionUser> modelPermissionUsers) {
+        this.modelPermissionUsers = modelPermissionUsers;
+    }
+
+
+
+    public List<RoleUser> getRoleUsers() {
+        return this.roleUsers;
+    }
+
+    public void setRoleUsers(List<RoleUser> roleUsers) {
+        this.roleUsers = roleUsers;
+    }
+
+
+    @Transient
+    public String getLabel() {
+        label = email;
+        return label;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id != null && id.equals(user.id);
+    }
+
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
 }
+

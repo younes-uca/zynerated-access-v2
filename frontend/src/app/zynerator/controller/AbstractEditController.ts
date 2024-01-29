@@ -5,12 +5,12 @@ import {Inject, Injectable, PLATFORM_ID} from '@angular/core';
 
 import {environment} from 'src/environments/environment';
 
-import {RoleService} from 'src/app/zynerator/security/Role.service';
 import {AbstractService} from 'src/app/zynerator/service/AbstractService';
 import {BaseDto} from 'src/app/zynerator/dto/BaseDto.model';
 import {BaseCriteria} from 'src/app/zynerator/criteria/BaseCriteria.model';
 import {StringUtilService} from 'src/app/zynerator/util/StringUtil.service';
 import {ServiceLocator} from 'src/app/zynerator/service/ServiceLocator';
+import {RoleAdminService} from '../../controller/service/admin/stock/RoleAdmin.service';
 
 @Injectable()
 export class AbstractEditController<DTO extends BaseDto, CRITERIA extends BaseCriteria, SERVICE extends AbstractService<DTO, CRITERIA>> {
@@ -22,7 +22,7 @@ export class AbstractEditController<DTO extends BaseDto, CRITERIA extends BaseCr
     protected service: SERVICE;
     protected messageService: MessageService;
     protected confirmationService: ConfirmationService;
-    protected roleService: RoleService;
+    protected roleService: RoleAdminService;
     protected router: Router;
     protected stringUtilService: StringUtilService;
     private _activeTab = 0;
@@ -34,7 +34,7 @@ export class AbstractEditController<DTO extends BaseDto, CRITERIA extends BaseCr
         this.service = service;
         this.messageService = ServiceLocator.injector.get(MessageService);
         this.confirmationService = ServiceLocator.injector.get(ConfirmationService);
-        this.roleService = ServiceLocator.injector.get(RoleService);
+        this.roleService = ServiceLocator.injector.get(RoleAdminService);
         this.router = ServiceLocator.injector.get(Router);
         this.stringUtilService = ServiceLocator.injector.get(StringUtilService);
 

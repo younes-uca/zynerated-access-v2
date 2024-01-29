@@ -1,11 +1,11 @@
-<div class="grid">
+<div class="grid" *ngIf="listActionIsValid">
     <div class="col-12">
         <p-toast></p-toast>
         <div class="card">
             <p-toolbar styleClass="mb-4">
                 <ng-template pTemplate="left">
-                                        <button pButton pRipple label=" {{'new' | translate}}" icon="pi pi-plus" class="p-button-success mr-2 mb-2" (click)="openCreate('Achat')"></button>
-                    <button [disabled]="isSelectionDisabled()" pButton pRipple label=" {{'delete' | translate}}" icon="pi pi-trash" class="p-button-danger mr-2 mb-2" (click)=deleteMultiple()></button>
+                                        <button pButton pRipple label=" {{'new' | translate}}" icon="pi pi-plus" class="p-button-success mr-2 mb-2" (click)="openCreate('Achat')" *ngIf="createActionIsValid"></button>
+                    <button [disabled]="isSelectionDisabled()" pButton pRipple label=" {{'delete' | translate}}" icon="pi pi-trash" class="p-button-danger mr-2 mb-2" (click)=deleteMultiple() *ngIf="deleteActionIsValid"></button>
                     <button pButton pRipple label=" {{'search' | translate}}" icon="pi pi-{{findByCriteriaShow?'angle-down':'angle-right'}}" class="p-button-warning mr-2 mb-2" (click)="this.showSearch()"></button>
                 </ng-template>
                 <ng-template pTemplate="right">
@@ -156,10 +156,10 @@
                         <td>{{element.client?.nom}}</td>
                             
                         <td>
-                            <button pButton pRipple icon="pi pi-pencil"  class="p-button-rounded p-button-success mr-2" (click)="edit(element)"></button>
-                            <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-info mr-2" (click)="view(element)"></button>
-                            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger mr-2" (click)="delete(element)"></button>
-                            <button pButton pRipple icon="pi pi-copy" class="p-button-rounded p-button-raised p-button-warning mr-2" (click)="duplicate(element)"></button>
+                            <button pButton pRipple icon="pi pi-pencil"  class="p-button-rounded p-button-success mr-2" (click)="edit(element)" *ngIf="editActionIsValid"></button>
+                            <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-info mr-2" (click)="view(element)" *ngIf="viewActionIsValid"></button>
+                            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger mr-2" (click)="delete(element)" *ngIf="deleteActionIsValid"></button>
+                            <button pButton pRipple icon="pi pi-copy" class="p-button-rounded p-button-raised p-button-warning mr-2" (click)="duplicate(element)"  *ngIf="duplicateActionIsValid"></button>
                         </td>
                     </tr>
                 </ng-template>
@@ -173,9 +173,14 @@
             </p-table>
         </div>
 
-        <app-achat-create-admin  *ngIf="createDialog"></app-achat-create-admin>
-        <app-achat-edit-admin  *ngIf="editDialog"></app-achat-edit-admin>
-        <app-achat-view-admin  *ngIf="viewDialog"></app-achat-view-admin>
+        <app-achat-create-admin  *ngIf="createDialog && createActionIsValid"></app-achat-create-admin>
+        <app-achat-edit-admin  *ngIf="editDialog && editActionIsValid"></app-achat-edit-admin>
+        <app-achat-view-admin  *ngIf="viewDialog && viewActionIsValid"></app-achat-view-admin>
         <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
     </div>
 </div>
+<p-card header="Permission not allowed" *ngIf="!listActionIsValid">
+    <p class="m-0">
+          You don't have permission to access !
+    </p>
+</p-card>

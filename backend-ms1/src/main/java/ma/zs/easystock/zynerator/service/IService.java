@@ -1,9 +1,8 @@
 package ma.zs.easystock.zynerator.service;
 
+import ma.zs.easystock.zynerator.security.bean.User;
 import ma.zs.easystock.zynerator.bean.BusinessObject;
 import ma.zs.easystock.zynerator.criteria.BaseCriteria;
-import ma.zs.easystock.zynerator.dto.AuditEntityDto;
-import ma.zs.easystock.zynerator.security.bean.User;
 
 import java.util.List;
 import org.springframework.web.multipart.MultipartFile;

@@ -1,31 +1,36 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Router} from '@angular/router';
 
 import {environment} from 'src/environments/environment';
 
-import { BehaviorSubject } from 'rxjs';
-import { Role } from './Role.model';
-import { User } from './User.model';
-import { TokenService } from './Token.service';
+import {BehaviorSubject} from 'rxjs';
+
+
+import {TokenService} from './Token.service';
+import {UserDto} from '../../controller/model/stock/User.model';
+import {RoleDto} from '../../controller/model/stock/Role.model';
+import {RoleUserDto} from '../../controller/model/stock/RoleUser.model';
+import {MessageService} from 'primeng/api';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class AuthService {
     readonly API = environment.loginUrl;
-    public _user = new User();
-    private _authenticatedUser = new User();
-    private _authenticated = <boolean>JSON.parse(localStorage.getItem('autenticated')) || false;
+    public _user = new UserDto();
+    private _authenticatedUser = new UserDto();
+    private _authenticated = (JSON.parse(localStorage.getItem('autenticated')) as boolean) || false;
     public _loggedIn = new BehaviorSubject<boolean>(false);
     public loggedIn$ = this._loggedIn.asObservable();
     public error: string = null;
 
 
-    constructor(private http: HttpClient, private tokenService: TokenService, private router: Router) { }
+    constructor(private http: HttpClient, private tokenService: TokenService, private router: Router, private messageService: MessageService) {
+    }
 
-        public loginAdmin(username: string, password: string) {
-       this.http.post<any>(this.API + 'login', { username, password }, { observe: 'response' }).subscribe(
+    public loginAdmin(username: string, password: string) {
+        this.http.post<any>(this.API + 'login', {username, password}, {observe: 'response'}).subscribe(
             resp => {
                 this.error = null;
                 const jwt = resp.headers.get('Authorization');
@@ -35,6 +40,17 @@ export class AuthService {
                 this.router.navigate(['/' + environment.rootAppUrl + '/admin']);
             }, (error: HttpErrorResponse) => {
                 this.error = error.error;
+                if (error.status === 401) {
+                    this.messageService.add({severity: 'error', summary: 'Error ' + error.status, detail: 'Unauthorized: Invalid credentials'});
+                } else if (error.status === 405) {
+                    this.messageService.add({
+                        severity: 'error',
+                        summary: 'Error ' + error.status,
+                        detail: 'Method Not Allowed: Please check your request method'
+                    });
+                } else {
+                    this.messageService.add({severity: 'error', summary: 'Error ' + error.status, detail: 'An unexpected error occurred'});
+                }
                 console.log(error);
             }
         );
@@ -53,7 +69,11 @@ export class AuthService {
         this._authenticatedUser.nom = nom;
         this._authenticatedUser.prenom = prenom;
         this._authenticatedUser.email = email;
-        this._authenticatedUser.roles = roles;
+        roles.forEach(role => {
+            const roleUser = new RoleUserDto();
+            roleUser.role.authority = role;
+            this._authenticatedUser.roleUsers.push(roleUser);
+        });
         localStorage.setItem('autenticated', JSON.stringify(true));
         this.authenticated = true;
         this._loggedIn.next(true);
@@ -61,19 +81,19 @@ export class AuthService {
     }
 
 
-    public hasRole(role: Role): boolean {
-        const index = this._authenticatedUser.roles.findIndex(r => r.authority === role.authority);
-        return  index > -1 ? true : false;
+    public hasRole(role: RoleDto): boolean {
+        const index = this._authenticatedUser.roleUsers.findIndex(r => r.role.authority === role.authority);
+        return index > -1 ? true : false;
     }
 
     public registerAdmin() {
-        this.http.post<any>(this.API + 'api/users/save', this.user, {observe: 'response'}).subscribe(
+        this.http.post<any>(this.API + 'api/admin/user/', this.user, {observe: 'response'}).subscribe(
             resp => {
-                    this.router.navigate(['admin/admin']);
-                }, (error: HttpErrorResponse) => {
-                    console.log(error.error);
-                }
-            );
+                this.router.navigate(['admin/admin']);
+            }, (error: HttpErrorResponse) => {
+                console.log(error.error);
+            }
+        );
     }
 
     public logout() {
@@ -81,16 +101,18 @@ export class AuthService {
         localStorage.setItem('autenticated', JSON.stringify(false));
         this.authenticated = false;
         this._loggedIn.next(false);
-        this._authenticatedUser = new User();
+        this._authenticatedUser = new UserDto();
         this.router.navigate(['']);
     }
-     get user(): User {
+
+    get user(): UserDto {
         return this._user;
     }
 
-    set user(value: User) {
+    set user(value: UserDto) {
         this._user = value;
     }
+
     get authenticated(): boolean {
         return this._authenticated;
     }
@@ -98,11 +120,12 @@ export class AuthService {
     set authenticated(value: boolean) {
         this._authenticated = value;
     }
-        get authenticatedUser(): User {
+
+    get authenticatedUser(): UserDto {
         return this._authenticatedUser;
     }
 
-    set authenticatedUser(value: User) {
+    set authenticatedUser(value: UserDto) {
         this._authenticatedUser = value;
     }
 
