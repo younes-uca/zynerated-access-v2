@@ -5,14 +5,14 @@ import {environment} from 'src/environments/environment';
 import {ClientDto} from 'src/app/controller/model/stock/Client.model';
 import {ClientCriteria} from 'src/app/controller/criteria/stock/ClientCriteria.model';
 import {AbstractService} from 'src/app/zynerator/service/AbstractService';
-import {RoleAdminService} from './RoleAdmin.service';
+import {RoleService} from '../../../../zynerator/security/controller/service/Role.service';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClientAdminService extends AbstractService<ClientDto, ClientCriteria> {
-     constructor(private http: HttpClient, private roleService: RoleAdminService) {
+     constructor(private http: HttpClient, private roleService: RoleService) {
         super();
         this.setHttp(http);
         this.setApi(environment.apiUrl + 'admin/client/');

@@ -3,12 +3,12 @@ package ma.zs.easystock;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import ma.zs.easystock.zynerator.security.service.facade.ActionPermissionAdminService;
-import ma.zs.easystock.zynerator.security.service.facade.ModelPermissionAdminService;
-import ma.zs.easystock.zynerator.security.service.facade.RoleAdminService;
-import ma.zs.easystock.zynerator.security.service.facade.UserAdminService;
 import ma.zs.easystock.zynerator.security.bean.*;
 import ma.zs.easystock.zynerator.security.common.AuthoritiesConstants;
+import ma.zs.easystock.zynerator.security.service.facade.ActionPermissionService;
+import ma.zs.easystock.zynerator.security.service.facade.ModelPermissionService;
+import ma.zs.easystock.zynerator.security.service.facade.RoleService;
+import ma.zs.easystock.zynerator.security.service.facade.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -51,7 +51,7 @@ public class EasystockApplication {
     }
 
     @Bean
-    public CommandLineRunner demo(UserAdminService userService, RoleAdminService roleService, ModelPermissionAdminService modelPermissionService, ActionPermissionAdminService actionPermissionService) {
+    public CommandLineRunner demo(UserService userService, RoleService roleService, ModelPermissionService modelPermissionService, ActionPermissionService actionPermissionService) {
         return (args) -> {
             if (true) {
 

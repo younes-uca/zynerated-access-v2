@@ -54,8 +54,8 @@ import {ServiceLocator} from './zynerator/service/ServiceLocator';
 
 import {AdminModule} from './module/admin/admin.module';
 import {AdminRoutingModule} from './module/admin/admin-routing.module';
-import {UserAdminService} from './controller/service/admin/stock/UserAdmin.service';
-import {RoleAdminService} from './controller/service/admin/stock/RoleAdmin.service';
+import {RoleService} from './zynerator/security/controller/service/Role.service';
+import {UserService} from './zynerator/security/controller/service/User.service';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -119,9 +119,9 @@ declarations: [
 providers: [
 /*    { provide: LocationStrategy, useClass: HashLocationStrategy }, */
   {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
-  UserAdminService,
+  UserService,
   MenuService,
-  RoleAdminService,
+  RoleService,
   MessageService,
   ConfirmationService,
   DatePipe,

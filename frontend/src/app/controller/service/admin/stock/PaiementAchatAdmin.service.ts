@@ -5,14 +5,14 @@ import {environment} from 'src/environments/environment';
 import {PaiementAchatDto} from 'src/app/controller/model/stock/PaiementAchat.model';
 import {PaiementAchatCriteria} from 'src/app/controller/criteria/stock/PaiementAchatCriteria.model';
 import {AbstractService} from 'src/app/zynerator/service/AbstractService';
-import {RoleAdminService} from './RoleAdmin.service';
+import {RoleService} from '../../../../zynerator/security/controller/service/Role.service';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class PaiementAchatAdminService extends AbstractService<PaiementAchatDto, PaiementAchatCriteria> {
-     constructor(private http: HttpClient, private roleService: RoleAdminService) {
+     constructor(private http: HttpClient, private roleService: RoleService) {
         super();
         this.setHttp(http);
         this.setApi(environment.apiUrl + 'admin/paiementAchat/');

@@ -3,7 +3,7 @@ import {HttpRequest, HttpHandler, HttpEvent, HttpInterceptor} from '@angular/com
 
 import { Observable } from 'rxjs';
 
-import { TokenService } from 'src/app/zynerator/security/Token.service';
+import { TokenService } from 'src/app/zynerator/security/controller/service/Token.service';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {

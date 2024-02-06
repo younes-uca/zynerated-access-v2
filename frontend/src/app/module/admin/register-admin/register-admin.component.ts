@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {AuthService} from 'src/app/zynerator/security/Auth.service';
-import {UserDto} from '../../../controller/model/stock/User.model';
-import {RoleUserDto} from '../../../controller/model/stock/RoleUser.model';
-import {RoleDto} from '../../../controller/model/stock/Role.model';
+import {AuthService} from 'src/app/zynerator/security/controller/service/Auth.service';
+import {UserDto} from '../../../zynerator/security/controller/model/User.model';
+import {RoleUserDto} from '../../../zynerator/security/controller/model/RoleUser.model';
+import {RoleDto} from '../../../zynerator/security/controller/model/Role.model';
 
 @Component({
   selector: 'app-register-admin',

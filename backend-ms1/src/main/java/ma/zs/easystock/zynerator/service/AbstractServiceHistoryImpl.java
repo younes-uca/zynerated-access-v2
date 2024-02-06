@@ -1,12 +1,12 @@
 package ma.zs.easystock.zynerator.service;
 
-import ma.zs.easystock.zynerator.security.bean.User;
-import ma.zs.easystock.zynerator.security.service.facade.UserAdminService;
 import ma.zs.easystock.zynerator.dto.AuditEntityDto;
 import ma.zs.easystock.zynerator.exception.EntityNotFoundException;
 import ma.zs.easystock.zynerator.history.HistBusinessObject;
 import ma.zs.easystock.zynerator.history.HistCriteria;
 import ma.zs.easystock.zynerator.repository.AbstractHistoryRepository;
+import ma.zs.easystock.zynerator.security.bean.User;
+import ma.zs.easystock.zynerator.security.service.facade.UserService;
 import ma.zs.easystock.zynerator.specification.AbstractHistorySpecification;
 import ma.zs.easystock.zynerator.util.RefelexivityUtil;
 import ma.zs.easystock.zynerator.util.StringUtil;
@@ -30,7 +30,7 @@ public abstract class AbstractServiceHistoryImpl< H extends HistBusinessObject, 
 
 
     @Autowired
-    protected UserAdminService userService;
+    protected UserService userService;
 
 
 

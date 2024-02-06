@@ -4,9 +4,9 @@ import {Router} from '@angular/router';
 import {animate, state, style, transition, trigger,} from '@angular/animations';
 
 import {AppComponent} from 'src/app/app.component';
-import {AuthService} from 'src/app/zynerator/security/Auth.service';
+import {AuthService} from 'src/app/zynerator/security/controller/service/Auth.service';
 import {AppMainComponent} from 'src/app/template/app.main.component';
-import {RoleAdminService} from '../controller/service/admin/stock/RoleAdmin.service';
+import {RoleService} from '../zynerator/security/controller/service/Role.service';
 
 @Component({
   selector: 'app-menu',
@@ -54,7 +54,7 @@ export class AppMenuComponent implements OnInit {
   model: any[];
   modelanonymous: any[];
     modelAdmin: any[];
-  constructor(public app: AppComponent, public appMain: AppMainComponent, private roleService: RoleAdminService, private authService:AuthService, private router: Router) {}
+  constructor(public app: AppComponent, public appMain: AppMainComponent, private roleService: RoleService, private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
     this.modelAdmin =

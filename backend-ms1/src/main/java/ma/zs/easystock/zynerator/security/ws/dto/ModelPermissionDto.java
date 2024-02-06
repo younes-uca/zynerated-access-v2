@@ -13,6 +13,7 @@ public class ModelPermissionDto  extends AuditBaseDto {
 
     private String reference  ;
     private String libelle  ;
+    private Boolean globalValue = true;
 
 
 
@@ -39,11 +40,11 @@ public class ModelPermissionDto  extends AuditBaseDto {
         this.libelle = libelle;
     }
 
+    public Boolean getGlobalValue() {
+        return globalValue;
+    }
 
-
-
-
-
-
-
+    public void setGlobalValue(Boolean globalValue) {
+        this.globalValue = globalValue;
+    }
 }

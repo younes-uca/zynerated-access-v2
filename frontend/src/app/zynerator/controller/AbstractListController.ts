@@ -5,14 +5,14 @@ import {Injectable} from '@angular/core';
 
 import {environment} from 'src/environments/environment';
 
-import {AuthService} from 'src/app/zynerator/security/Auth.service';
+import {AuthService} from 'src/app/zynerator/security/controller/service/Auth.service';
 import {ExportService} from 'src/app/zynerator/util/Export.service';
 import {AbstractService} from 'src/app/zynerator/service/AbstractService';
 import {BaseDto} from 'src/app/zynerator/dto/BaseDto.model';
 import {BaseCriteria} from 'src/app/zynerator/criteria/BaseCriteria.model';
 import {ServiceLocator} from 'src/app/zynerator/service/ServiceLocator';
 import {StringUtilService} from 'src/app/zynerator/util/StringUtil.service';
-import {RoleAdminService} from '../../controller/service/admin/stock/RoleAdmin.service';
+import {RoleService} from '../security/controller/service/Role.service';
 
 
 @Injectable()
@@ -32,7 +32,7 @@ export class AbstractListController<DTO extends BaseDto, CRITERIA extends BaseCr
     protected service: SERVICE;
     protected messageService: MessageService;
     protected confirmationService: ConfirmationService;
-    protected roleService: RoleAdminService;
+    protected roleService: RoleService;
     protected router: Router;
     protected stringUtilService: StringUtilService;
     protected authService: AuthService;
@@ -45,7 +45,7 @@ export class AbstractListController<DTO extends BaseDto, CRITERIA extends BaseCr
         this.datePipe = ServiceLocator.injector.get(DatePipe);
         this.messageService = ServiceLocator.injector.get(MessageService);
         this.confirmationService = ServiceLocator.injector.get(ConfirmationService);
-        this.roleService = ServiceLocator.injector.get(RoleAdminService);
+        this.roleService = ServiceLocator.injector.get(RoleService);
         this.router = ServiceLocator.injector.get(Router);
         this.authService= ServiceLocator.injector.get(AuthService);
         this.exportService= ServiceLocator.injector.get(ExportService);

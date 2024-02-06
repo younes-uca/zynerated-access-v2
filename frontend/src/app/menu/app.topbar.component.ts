@@ -6,12 +6,10 @@ import { AppComponent } from 'src/app/app.component';
 import { AppMainComponent } from 'src/app/template/app.main.component';
 
 
-import { AuthService } from 'src/app/zynerator/security/Auth.service';
-import {UserDto} from '../controller/model/stock/User.model';
-import {UserEditAdminComponent} from '../module/admin/view/stock/utilisateur/edit/user-edit-admin.component';
-import {UserAdminService} from '../controller/service/admin/stock/UserAdmin.service';
-import {Footer, MessageService} from 'primeng/api';
-import {DialogService, DynamicDialogRef} from 'primeng/dynamicdialog';
+import { AuthService } from 'src/app/zynerator/security/controller/service/Auth.service';
+import {UserDto} from '../zynerator/security/controller/model/User.model';
+import {UserService} from '../zynerator/security/controller/service/User.service';
+
 
 @Component({
     selector: 'app-topbar',
@@ -19,27 +17,34 @@ import {DialogService, DynamicDialogRef} from 'primeng/dynamicdialog';
 })
 export class AppTopBarComponent{
 
-    constructor(public app: AppComponent, public appMain: AppMainComponent, private authService: AuthService, private translateService: TranslateService, private userService: UserAdminService) {
+    constructor(public app: AppComponent, public appMain: AppMainComponent, private authService: AuthService, private translateService: TranslateService, private userService: UserService) {
     }
 
 
 
-    get authenticatedUser(): UserDto{
-        return this.authService.authenticatedUser;
-    }
+
 
     roleAdmin = false;
-   item = new UserDto();
+
    editDialog = false ;
 
     public async edit(dto: UserDto) {
-        this.userService.findByIdWithAssociatedList(dto).subscribe(res => {
+        this.userService.findByUsername(dto.username).subscribe(res => {
             this.item = res;
-            console.log(res);
             this.editDialog = true;
         });
 
     }
+    public editUser(){
+        this.userService.edit().subscribe(data => this.authenticatedUser = data);
+        this.authService.loadInfos();
+        this.editDialog = false;
+    }
+
+    public hideEditDialog() {
+        this.editDialog = false;
+    }
+
     useLanguage(language: string): void {
         this.translateService.use(language);
     }
@@ -56,4 +61,17 @@ export class AppTopBarComponent{
     }
 
 
+    get item(): UserDto {
+        return this.userService.item;
+    }
+
+    set item(value: UserDto) {
+        this.userService.item = value;
+    }
+    get authenticatedUser(): UserDto{
+        return this.authService.authenticatedUser;
+    }
+    set authenticatedUser(userDto: UserDto){
+        this.authService.authenticatedUser = userDto;
+    }
 }

@@ -9,8 +9,8 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import ma.zs.easystock.zynerator.security.service.facade.UserAdminService;
 import ma.zs.easystock.zynerator.security.common.SecurityParams;
+import ma.zs.easystock.zynerator.security.service.facade.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +27,7 @@ import java.util.Collection;
 import java.util.List;
 
 public class AuthTokenFilter extends OncePerRequestFilter {
-    @Autowired
-    private JwtUtils jwtUtils;
 
-    @Autowired
-    private UserAdminService userDetailsService;
-
-    private static final Logger logger = LoggerFactory.getLogger(AuthTokenFilter.class);
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -61,11 +55,10 @@ public class AuthTokenFilter extends OncePerRequestFilter {
                 JWTVerifier verifier = JWT.require(Algorithm.HMAC256(SecurityParams.SECRET)).build();
                 String jwt = jwtToken.substring(SecurityParams.HEADER_PREFIX.length());
                 DecodedJWT decodedJWT = verifier.verify(jwt);
-                System.out.println("JWT=" + jwt);
                 String username = decodedJWT.getSubject();
                 List<String> roles = decodedJWT.getClaims().get("roles").asList(String.class);
-                System.out.println("username=" + username);
-                System.out.println("roles=" + roles);
+
+
                 Collection<GrantedAuthority> authorities = new ArrayList<>();
                 roles.forEach(rn -> {
                     authorities.add(new SimpleGrantedAuthority(rn));

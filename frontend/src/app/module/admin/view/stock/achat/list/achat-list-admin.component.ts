@@ -13,7 +13,7 @@ import {ClientDto} from 'src/app/controller/model/stock/Client.model';
 import {ClientAdminService} from 'src/app/controller/service/admin/stock/ClientAdmin.service';
 import {AchatItemDto} from 'src/app/controller/model/stock/AchatItem.model';
 import {AchatItemAdminService} from 'src/app/controller/service/admin/stock/AchatItemAdmin.service';
-import {AuthService} from '../../../../../../zynerator/security/Auth.service';
+import {AuthService} from '../../../../../../zynerator/security/controller/service/Auth.service';
 
 
 @Component({

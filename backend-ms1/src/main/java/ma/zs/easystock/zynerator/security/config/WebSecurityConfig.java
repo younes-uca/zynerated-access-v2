@@ -1,6 +1,6 @@
 package ma.zs.easystock.zynerator.security.config;
 
-import ma.zs.easystock.zynerator.security.service.facade.UserAdminService;
+import ma.zs.easystock.zynerator.security.service.facade.UserService;
 import ma.zs.easystock.zynerator.security.common.AuthoritiesConstants;
 import ma.zs.easystock.zynerator.security.jwt.AuthEntryPointJwt;
 import ma.zs.easystock.zynerator.security.jwt.AuthTokenFilter;
@@ -22,7 +22,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableMethodSecurity
 public class WebSecurityConfig {
     @Autowired
-    UserAdminService userDetailsService;
+    UserService userDetailsService;
 
     @Autowired
     private AuthEntryPointJwt unauthorizedHandler;

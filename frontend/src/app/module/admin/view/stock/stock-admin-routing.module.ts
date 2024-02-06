@@ -7,17 +7,18 @@ import { AuthGuard } from 'src/app/controller/guards/auth.guard';
 
 
 
-import { ActionPermissionListAdminComponent } from './action-permission/list/action-permission-list-admin.component';
+import { ActionPermissionListComponent } from './action-permission/list/action-permission-list.component';
 import { PaiementAchatListAdminComponent } from './paiement-achat/list/paiement-achat-list-admin.component';
 import { CategorieProduitListAdminComponent } from './categorie-produit/list/categorie-produit-list-admin.component';
 import { ProduitListAdminComponent } from './produit/list/produit-list-admin.component';
 import { AchatListAdminComponent } from './achat/list/achat-list-admin.component';
 import { ClientListAdminComponent } from './client/list/client-list-admin.component';
-import { ModelPermissionListAdminComponent } from './model-permission/list/model-permission-list-admin.component';
 import { AchatItemListAdminComponent } from './achat-item/list/achat-item-list-admin.component';
-import {UserListAdminComponent} from './utilisateur/list/user-list-admin.component';
-import {ModelPermissionUserListAdminComponent} from './model-permission-utilisateur/list/model-permission-user-list-admin.component';
-import {RoleListAdminComponent} from './role/list/role-list-admin.component';
+import {ModelPermissionUserListComponent} from './model-permission-utilisateur/list/model-permission-user-list.component';
+import {ModelPermissionListComponent} from './model-permission/list/model-permission-list.component';
+import {UserListComponent} from './utilisateur/list/user-list.component';
+import {RoleListComponent} from './role/list/role-list.component';
+
 @NgModule({
     imports: [
         RouterModule.forChild(
@@ -33,7 +34,7 @@ import {RoleListAdminComponent} from './role/list/role-list-admin.component';
                             children: [
                                 {
                                     path: 'list',
-                                    component: ActionPermissionListAdminComponent ,
+                                    component: ActionPermissionListComponent ,
                                     canActivate: [AuthGuard]
                                 }
                             ]
@@ -45,7 +46,7 @@ import {RoleListAdminComponent} from './role/list/role-list-admin.component';
                             children: [
                                 {
                                     path: 'list',
-                                    component: ModelPermissionUserListAdminComponent ,
+                                    component: ModelPermissionUserListComponent ,
                                     canActivate: [AuthGuard]
                                 }
                             ]
@@ -105,7 +106,7 @@ import {RoleListAdminComponent} from './role/list/role-list-admin.component';
                             children: [
                                 {
                                     path: 'list',
-                                    component: RoleListAdminComponent ,
+                                    component: RoleListComponent ,
                                     canActivate: [AuthGuard]
                                 }
                             ]
@@ -129,7 +130,7 @@ import {RoleListAdminComponent} from './role/list/role-list-admin.component';
                             children: [
                                 {
                                     path: 'list',
-                                    component: UserListAdminComponent ,
+                                    component: UserListComponent ,
                                     canActivate: [AuthGuard]
                                 }
                             ]
@@ -141,7 +142,7 @@ import {RoleListAdminComponent} from './role/list/role-list-admin.component';
                             children: [
                                 {
                                     path: 'list',
-                                    component: ModelPermissionListAdminComponent ,
+                                    component: ModelPermissionListComponent ,
                                     canActivate: [AuthGuard]
                                 }
                             ]

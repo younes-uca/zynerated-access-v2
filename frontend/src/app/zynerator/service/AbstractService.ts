@@ -43,7 +43,7 @@ export abstract class AbstractService<DTO extends BaseDto, CRITERIA extends Base
     private _viewActionIsValid = false;
     private _duplicateActionIsValid = false;
 
-    protected API_PERMISSION = environment.apiUrl + 'admin/modelPermissionUser/';
+    protected API_PERMISSION = environment.apiUrl + 'modelPermissionUser/';
 
 
 

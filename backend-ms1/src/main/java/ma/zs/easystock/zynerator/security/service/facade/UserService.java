@@ -1,14 +1,21 @@
 package ma.zs.easystock.zynerator.security.service.facade;
 
 import ma.zs.easystock.zynerator.security.bean.User;
+import ma.zs.easystock.zynerator.security.dao.criteria.core.UserCriteria;
+import ma.zs.easystock.zynerator.service.IService;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
-public interface UserService extends UserDetailsService {
 
-   String cryptPassword(String value);
+public interface UserService extends IService<User, UserCriteria>, UserDetailsService {
 
-   boolean changePassword(String username, String newPassword);
+
+    User findByUsername(String username);
+
+
+    String cryptPassword(String value);
+
+    boolean changePassword(String username, String newPassword);
     User findByUsernameWithRoles(String username);
 
     int  deleteByUsername(String username);

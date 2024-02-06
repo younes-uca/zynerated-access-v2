@@ -10,7 +10,7 @@ import {BaseCriteria} from 'src/app/zynerator/criteria/BaseCriteria.model';
 import {StringUtilService} from 'src/app/zynerator/util/StringUtil.service';
 import {FileTempDto} from 'src/app/zynerator/dto/FileTempDto.model';
 import {ServiceLocator} from 'src/app/zynerator/service/ServiceLocator';
-import {RoleAdminService} from '../../controller/service/admin/stock/RoleAdmin.service';
+import {RoleService} from '../security/controller/service/Role.service';
 
 @Injectable()
 export class AbstractCreateController<DTO extends BaseDto, CRITERIA extends BaseCriteria, SERVICE extends AbstractService<DTO, CRITERIA>> {
@@ -21,7 +21,7 @@ export class AbstractCreateController<DTO extends BaseDto, CRITERIA extends Base
     protected service: SERVICE;
     protected messageService: MessageService;
     protected confirmationService: ConfirmationService;
-    protected roleService: RoleAdminService;
+    protected roleService: RoleService;
     protected router: Router;
     protected stringUtilService: StringUtilService;
     protected _activeTab = 0;
@@ -32,7 +32,7 @@ export class AbstractCreateController<DTO extends BaseDto, CRITERIA extends Base
         this.datePipe = ServiceLocator.injector.get(DatePipe);
         this.messageService = ServiceLocator.injector.get(MessageService);
         this.confirmationService = ServiceLocator.injector.get(ConfirmationService);
-        this.roleService = ServiceLocator.injector.get(RoleAdminService);
+        this.roleService = ServiceLocator.injector.get(RoleService);
         this.router = ServiceLocator.injector.get(Router);
         this.stringUtilService = ServiceLocator.injector.get(StringUtilService);
 

@@ -3,7 +3,7 @@ package ma.zs.easystock.zynerator.security.common;
 import java.util.stream.Stream;
 
 import ma.zs.easystock.zynerator.security.bean.User;
-import ma.zs.easystock.zynerator.security.service.facade.UserAdminService;
+import ma.zs.easystock.zynerator.security.service.facade.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
@@ -17,7 +17,7 @@ import ma.zs.easystock.EasystockApplication;
 public class SecurityUtil {
 
     public static User getCurrentUser() {
-        UserAdminService userService= EasystockApplication.getCtx().getBean(UserAdminService.class);
+        UserService userService= EasystockApplication.getCtx().getBean(UserService.class);
 
         SecurityContext securityContext = SecurityContextHolder.getContext();
         Object user = securityContext.getAuthentication().getPrincipal();
